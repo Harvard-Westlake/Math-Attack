@@ -1,4 +1,8 @@
 How do you jump in a 2d game if you move in 8 directions (including up)
+- We can only jump with a jump button, the 8 directions is just where you are facing that will determine where your attacks (melee and ranged) will go
 How do all the bosses move (other than attacks)?
+- They can only move with their movement attack
 Are there any other boss interactions between weis and chen?
+ - No
 Is the only attack a player can do a DashAttack? 
+- A player can do a dash(melee) attack that sends them in the direction they are facing, can do a ranged attack in the direction they are facing, and also use an ability
