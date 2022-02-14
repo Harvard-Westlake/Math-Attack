@@ -2,8 +2,8 @@ export default class Player{
   constructor(gameWidth, gameHeight){
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.width = 90;
-    this.height = 180;
+    this.width = 50;
+    this.height = 50;
     this.speedX = 7;
     this.speedY = 40;
     this.velX = 0;
