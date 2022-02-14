@@ -1,0 +1,266 @@
+Game Class 
+gamePaused boolean
+
+Player Class (Rhea)
+
+Boolean isInvincible
+Int hearts 
+Int hP
+Int speed
+Int position
+String direction 
+Double jumpHeight
+Weapon currentWeapon
+Inventory playerInventory
+
+Public void setPosition(int pos){
+	//set initial position of player on screen or updates position of player
+}
+Public int getPosition(){
+	Return position of player. 
+}
+
+Public void checkAbility()
+	//if 5%speed boost ability is equipped, increase speed var by 5%
+Public void setHearts(){
+// if decreases hearts, updates isInvincible
+
+}
+
+Public int getHearts(){
+//returns how many hearts
+}
+
+
+Public void setHP(){
+	//this will be updated by boss damage
+}
+
+Public void getHP(){
+	//returns hP
+}
+
+Public void setJumpHeight(){\
+	//will be updated based on bass damage…?
+}
+
+Public Double getJumpHeight(){
+
+}
+
+Public String keyPressed(){
+//checks for keys pressed and returns string of direction/keypressed
+//updates direction to match new direction (only when left or right arrow is pressed)
+}
+
+Public void control(keyPressed){
+	//moves the player/sprite in the direction passed in
+	//arrow keys for moving left or right or down
+// z for jump
+//c calls useAbility()
+}
+
+Public void earnAbility(){
+//only called when you defeat a boss as specified in the game design
+//Creates a new Ability object, passes it in to inventory
+}
+
+Public void earnEquipment{
+//only called when you defeat a boss as specified in the game design
+//Creates a new Equipment object, passes it in to inventory
+}
+
+Public void addToInventory{
+	//only called if defeats boss
+	//uses the ownedInventory var from Inventory class
+}
+
+
+
+Ability Class (Rhea)
+String name // stores the ability you are using
+Int cooldown
+Int damage
+Boolean inUse
+
+Public Ability(){
+//sets name and cooldown and damage 
+}
+
+Public void setInUse(boolean bool){
+//says whether or not the ability is in use or not
+//would likely be used to check if we can alter dash attack
+ }
+Public boolean getInUse(){
+	Return boolean
+}
+
+Equipment Class 
+	String type; // type of equipment(normal speed, cowboy boots, 5% speed increase, sneakers)
+
+
+
+
+Boss Weapons
+Var int range;
+Var bool melee;
+Var int damage;
+BossWeapon(int range, bool melee, int damage){}
+//Getters
+
+Boss Class(Natalie)
+Var int movementSpeed
+Var BossAttack attack
+Var int timeBetweenAttacks;
+Var int position; (x,y)
+Getters and setters;
+Var int difficulty; (the level/boss number)
+Functions
+Constructor public BossClass(int speed, BossAttack attack, int timeBetweenAttacks, int difficulty, String Name){
+
+}
+Void Movement(int[] playerPosition, int playerDistance){
+//If difficulty less than 3 then boss moves towards player at their speed for the timeInBetween attacks then if in range attacks meleeAttack() and if not in range rangeAttack()
+//if difficulty 3 boss moves towards player for timeBetweenAttacks and if in range does meleeAttack() if not in range randomly does either rangedAttack() or movementAttack()
+If difficulty 4 (this has two bosses on the board both weis and chen) run movetogether 
+If difficulty is 5
+
+}
+Void movetogether(int[] playerPosition){
+Both weis and chen move to the same position that is furthest from the player;
+}
+
+
+
+Inventory
+let playerInventory = {
+	var ownedInventory : []
+Equipment Equippedequipment
+	Ability Equippedability
+	Weapon Equippedweapon
+
+function: equipEquipment(newEquipment){
+	//switch equipment to new equipment if new equipment is in their inventory
+}
+	function: equipAbility(newAbility){}
+	//switch ability to new ability if new ability is in their ownedInventory
+
+}
+
+	function: equipWeapon(newWeapon){}
+	//switch weapon to new weapon if new weapon is in their ownedInventory
+}
+
+
+SHOP:
+Let shop = {
+	var itemsOwned :[]
+var itemsInShop :[] 
+	var dollarsInWallet 
+	function: pauseGame  {
+	//if player is in shop, pause the game
+}
+Function : buyItem(itemNumber) {
+//if dollars in wallet is sufficient to buy price of Item 
+//subtract amount from wallet
+//add item to player inventory class
+}
+
+
+
+PlayerAttack Class (Player player) // takes in a player
+
+String direction // a string that represents one of the eight cardinal directions
+boolean hit =false// true if you hit the boss, false otherwise 
+var distance // set this value in a method 
+var speed // dependent on ability 
+var height // dependent on ability 
+var damage // dependent on ability 
+
+
+function setDirection(){
+	direction=Player.keysPressed()  // sets the direction variable to the direction 	
+} 
+
+function setDistance(){
+	// Weapon weapon= Player.getWeapon (); 
+// depending on which weapon you have, the distance gets set to a specific amount (see below) 
+	// ex: if meter stick then distance=5*Player.getLength(); → (you can look at the text spec
+	For all the individual weapons) 
+} 
+
+function dashAttack(String direction, var distance){ 
+	// checks to see weapon cooldown is 0 can proceed 
+// checks to see if the player has a certain ability activated using the checkAbility method and then alters height, damage, and speed variables depending on the ability that the Player has 
+// moves the player in the specified direction of size distance (i.e. only move the player east, 5px) 
+	// while this method is running, set isInvincible to true; 
+} 
+
+function increaseInvincibility() {
+	// if hit==true 
+	//then increase the time you are invincible by half a second 
+} 
+
+function rangeAttack (var direction, Weapon weapon){
+	// checks to see if cooldown is 0 before attack can proceed 
+	//shoots the direction that the players indicates 
+	// range of shooting and speed depends on the weapon that the player has 
+	
+} 
+
+function swingAttack(){
+// checks to see if cooldown is 0 before attack can proceed 
+	// if the current weapon is a golf club then this attack is possible 
+	//isInvincible = true; 
+// else (i.e. the current weapon is not a golf club) the player can not use this attack
+} 
+Weapons (){
+Boolean melee; 
+Boolean range; 
+var damage; 
+var dashDistance; 
+String type; 
+int attackRate; 
+int coolDown; 
+Boolean touchesWalls; // specific to boomerang (i.e.  Bounces off ground and walls, and stays out for a bit before boomeranging back) 
+
+// create getter functions for each variable 
+
+} 
+
+
+BossAttack Class (Ava)
+Variables
+string direction //determines direction of the attack, string that represents one of the eight cardinal directions
+boolean hit //true if you hit the boss, false otherwise
+int [] playerPosition //int array [x, y] position of player
+
+function setDirection()
+	//initialize playerPosition with Player.getPosition()
+//set var direction to the direction towards the player
+	//ex: player is positioned northeast of the boss, therefore boss attacks in northeast direction
+function windUp(){
+	//play windUp animation in corresponding direction
+}
+function rangedAttack(BossWeapon weapon){
+	//setDirection()
+	//windUp()
+	//play rangedAttack animation in corresponding direction
+	//if hit
+		//deplete Player HP by the int (weapon.getDamage)
+}
+function meleeAttack(BossWeapon weapon){
+	//setDirection()
+	//windUp()
+	//play meleeAttack animation in corresponding direction
+	//if hit
+		//deplete Player HP by the int (weapon.getDamage)
+}
+function movementAttack(BossWeapon weapon)
+	//setDirection()
+	//windUp()
+	//play movementAttack animation in corresponding direction
+	//move Boss to random position within a certain radius of playerPosition
+	//if hit
+		//deplete Player HP by the int (weapon.getDamage)
+
