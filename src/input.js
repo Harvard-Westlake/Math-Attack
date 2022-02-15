@@ -5,9 +5,11 @@ export default class InputHandler{
   updateUnderlyingOrientation(leftOrRight) {
     if (leftOrRight == this.keys.left) {
       this.underlyingOrientation = this.orientations.left;
+      this.player.moveLeft();
     }
     if (leftOrRight == this.keys.right) {
       this.underlyingOrientation = this.orientations.right;
+      this.player.moveRight();
     }
     this.updateOrientation();
   }
@@ -18,7 +20,6 @@ export default class InputHandler{
   updateOrientation() {
     switch (this.underlyingOrientation) {
 
-      //
       case this.orientations.left:
         if (this.keyDown[this.keys.up]) {
           if (!this.keyDown[this.keys.left]) {
@@ -37,7 +38,6 @@ export default class InputHandler{
         }
         break;
 
-      //
       case this.orientations.right:
         if (this.keyDown[this.keys.up]) {
           if (!this.keyDown[this.keys.right]) {
@@ -59,7 +59,8 @@ export default class InputHandler{
       default:
         break;
     }
-    console.log("Orientation:" + this.orientation);
+    // Test Orientation by uncommenting this - orientation code
+    //console.log("Orientation:" + this.orientation);
   }
 
   constructor(player){
@@ -78,6 +79,7 @@ export default class InputHandler{
     this.underlyingOrientation = this.orientations.right;
     this.orientation = this.orientations.right;
 
+    this.keyDown = {};
     this.keys = {
       "left" : 37,
       "right" : 39,
@@ -86,10 +88,9 @@ export default class InputHandler{
       "shift" : 16,
       "space" : 32
     };
-    this.keyDown = {
-    };
 
     document.addEventListener('keydown', (event)=>{
+
       switch (event.keyCode) {
 
         // Arrow keys for orientation
@@ -97,7 +98,6 @@ export default class InputHandler{
         case this.keys.right:
           this.keyDown[event.keyCode] = true;
           this.updateUnderlyingOrientation(event.keyCode);
-          //this.move(event.keyCode);
           break;
 
         case this.keys.up:
@@ -108,8 +108,10 @@ export default class InputHandler{
 
         // Uses only jmp and shift
         case this.keys.jump:
+          this.player.jump();
+          break;
         case this.keys.shift:
-          //this.moveEvent(event.keyCode);
+          this.player.dash();
           break;
 
         default:
@@ -119,9 +121,6 @@ export default class InputHandler{
 
     document.addEventListener('keyup', (event)=>{
       switch (event.keyCode) {
-        //case this.keys.shift:
-          //this.player.dash();
-          //break;
 
         case this.keys.up:
         case this.keys.down:
@@ -132,9 +131,8 @@ export default class InputHandler{
         case this.keys.left:
         case this.keys.right:
           this.keyDown[event.keyCode] = false;
+          this.player.stopHorizontal();
           this.updateOrientation();
-          break;
-
           break;
 
         default:
@@ -145,18 +143,3 @@ export default class InputHandler{
 
 
 }
-
-
-  // Uncoment this out for testing
-class Player {
-  dash() {}
-  jump() {}
-  moveLeft() {}
-  moveRight() {}
-  stopHorizontal() {}
-}
-
-let input = new InputHandler(new Player);
-document.addEventListener('keydown', (event)=>{
-//console.log(event.keyCode);
-});
