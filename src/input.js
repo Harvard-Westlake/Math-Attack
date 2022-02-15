@@ -21,9 +21,17 @@ export default class InputHandler{
       //
       case this.orientations.left:
         if (this.keyDown[this.keys.up]) {
-          this.orientation = this.orientations.upLeft;
+          if (!this.keyDown[this.keys.left]) {
+            this.orientation = this.orientations.up;
+          } else {
+            this.orientation = this.orientations.upLeft;
+          }
         } else if (this.keyDown[this.keys.down]) {
-          this.orientation = this.orientations.downLeft;
+          if (!this.keyDown[this.keys.left]) {
+            this.orientation = this.orientations.down;
+          } else {
+            this.orientation = this.orientations.downLeft;
+          }
         } else {
           this.orientation = this.orientations.left;
         }
@@ -32,9 +40,17 @@ export default class InputHandler{
       //
       case this.orientations.right:
         if (this.keyDown[this.keys.up]) {
-          this.orientation = this.orientations.upRight;
+          if (!this.keyDown[this.keys.right]) {
+            this.orientation = this.orientations.up;
+          } else {
+            this.orientation = this.orientations.upRight;
+          }
         } else if (this.keyDown[this.keys.down]) {
-          this.orientation = this.orientations.downRight;
+          if (!this.keyDown[this.keys.right]) {
+            this.orientation = this.orientations.down;
+          } else {
+            this.orientation = this.orientations.downRight;
+          }
         } else {
           this.orientation = this.orientations.right;
         }
@@ -79,6 +95,7 @@ export default class InputHandler{
         // Arrow keys for orientation
         case this.keys.left:
         case this.keys.right:
+          this.keyDown[event.keyCode] = true;
           this.updateUnderlyingOrientation(event.keyCode);
           //this.move(event.keyCode);
           break;
@@ -110,6 +127,14 @@ export default class InputHandler{
         case this.keys.down:
           this.keyDown[event.keyCode] = false;
           this.updateOrientation();
+          break;
+
+        case this.keys.left:
+        case this.keys.right:
+          this.keyDown[event.keyCode] = false;
+          this.updateOrientation();
+          break;
+
           break;
 
         default:
