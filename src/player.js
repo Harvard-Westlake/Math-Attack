@@ -6,12 +6,12 @@ export default class Player{
     this.height = 50;
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.maxSpeedX = 2.7;
+    this.maxSpeedX = 3.5;
     this.maxSpeedY = 4;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
-    this.stopSlidyCoef = 0.05;
+    this.stopSlidyCoef = 0.1;
     this.hasJumped = false;
     this.accDown=.2;
 
@@ -24,21 +24,21 @@ export default class Player{
 
   }
   updateVelocityX (){
-    if (this.isMovingRight == true && Math.abs(this.velX) < (this.maxSpeedX)){
+    if (this.isMovingRight == true && Math.abs(this.velX) <= (this.maxSpeedX)){
       this.velX+=this.runSlidyCoef;
     }
-    else if (this.isMovingLeft == true && Math.abs(this.velX) < (this.maxSpeedX)){
+    else if (this.isMovingLeft == true && Math.abs(this.velX) <= (this.maxSpeedX)){
       this.velX-=this.runSlidyCoef;
     }
     else if (this.velX!=0){
-      if (this.velX > 0){
+      if (Math.abs(this.velX)<=this.stopSlidyCoef){
+        this.velX=0;
+      }
+      else if (this.velX > 0){
         this.velX-=this.stopSlidyCoef;
       }
       else if (this.velX < 0){
         this.velX+=this.stopSlidyCoef;
-      }
-      if (Math.abs(this.velX)<=this.stopSlidyCoef){
-        this.velX=0;
       }
     }
   }
@@ -80,7 +80,7 @@ export default class Player{
 
   update(deltaTime){
     if(!deltaTime)return;
-    window.setTimeout(this.updateVelocityX(), 100);
+    window.setTimeout(this.updateVelocityX(), 10);
     console.log (this.velX);
     this.position.x+=this.velX;
     this.position.y-=this.velY;
