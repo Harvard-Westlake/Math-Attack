@@ -60,7 +60,7 @@ export default class InputHandler{
         break;
     }
     // Test Orientation by uncommenting this - orientation code
-    //console.log("Orientation:" + this.orientation);
+    console.log("Orientation:" + this.orientation);
   }
 
   constructor(player){
@@ -86,11 +86,13 @@ export default class InputHandler{
       "up" : 38,
       "down" : 40,
       "shift" : 16,
-      "space" : 32
+      "space" : 32,
+      "jump" : 90
     };
 
     document.addEventListener('keydown', (event)=>{
 
+      //alert(event.keyCode);
       switch (event.keyCode) {
 
         // Arrow keys for orientation
@@ -111,7 +113,7 @@ export default class InputHandler{
           this.player.jump();
           break;
         case this.keys.shift:
-          this.player.dash();
+          this.player.dash(this.orientation, this.orientations);
           break;
 
         default:
