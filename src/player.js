@@ -38,32 +38,32 @@ export default class Player{
   dash(orientation, orientations){
     switch(orientation){
       case orientations.left:
-        this.position.x-=2*this.width;
+        this.position.x-=4*this.width;
         break;
       case orientations.right:
-        this.position.x+=2*this.width;
+        this.position.x+=4*this.width;
         break;
       case orientations.down:
-        this.position.y+=2*this.width;
+        this.position.y+=4*this.width;
         break;
       case orientations.up:
-        this.position.y-=2*this.width;
+        this.position.y-=4*this.width;
         break;
       case orientations.upLeft:
-        this.position.x-=1.4*this.width;
-        this.position.y-=1.4*this.width;
+        this.position.x-=2.8*this.width;
+        this.position.y-=2.8*this.width;
         break;
       case orientations.upRight:
-        this.position.x+=1.4*this.width;
-        this.position.y-=1.4*this.width;
+        this.position.x+=2.8*this.width;
+        this.position.y-=2.8*this.width;
         break;
       case orientations.downLeft:
-        this.position.x-=1.4*this.width;
-        this.position.y+=1.4*this.width;
+        this.position.x-=2.8*this.width;
+        this.position.y+=2.8*this.width;
         break;
       case orientations.downRight:
-        this.position.x+=1.4*this.width;
-        this.position.y+=1.4*this.width;
+        this.position.x+=2.8*this.width;
+        this.position.y+=2.8*this.width;
         break;
     }
 
