@@ -7,14 +7,15 @@ export default class Player{
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.maxSpeedX = 5;
-    this.maxSpeedY = 7;
+    this.maxSpeedY = 8;
+    this.maxDashSpeed=11;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.3;
     this.hasJumped = false;
     this.hasDashed = false;
-    this.accDown=.2;
+    this.accDown=.3;
 
     this.playerImage = new Image();
     this.playerImage.src = "/images/PlayerDrawUp.jpg";
@@ -65,32 +66,32 @@ export default class Player{
     this.hasDashed = true;
     switch(orientation){
       case orientations.left:
-        this.position.x-=4*this.width;
+        this.velX=-1*this.maxDashSpeed;
         break;
       case orientations.right:
-        this.position.x+=4*this.width;
+        this.velX=this.maxDashSpeed;
         break;
       case orientations.down:
-        this.position.y+=4*this.width;
+        this.velY=-1*this.maxDashSpeed;
         break;
       case orientations.up:
-        this.position.y-=4*this.width;
+        this.velY=this.maxDashSpeed;
         break;
       case orientations.upLeft:
-        this.position.x-=2.8*this.width;
-        this.position.y-=2.8*this.width;
+        this.velX=-1*this.maxDashSpeed;
+        this.velY=this.maxDashSpeed/1.4;
         break;
       case orientations.upRight:
-        this.position.x+=2.8*this.width;
-        this.position.y-=2.8*this.width;
+        this.velX=this.maxDashSpeed;
+        this.velY=this.maxDashSpeed/1.4;
         break;
       case orientations.downLeft:
-        this.position.x-=2.8*this.width;
-        this.position.y+=2.8*this.width;
+        this.velX=-1*this.maxDashSpeed;
+        this.velY=-1*this.maxDashSpeed/1.4;
         break;
       case orientations.downRight:
-        this.position.x+=2.8*this.width;
-        this.position.y+=2.8*this.width;
+        this.velX=this.maxDashSpeed;
+        this.velY=-1*this.maxDashSpeed/1.4;
         break;
     }
 
@@ -117,6 +118,9 @@ export default class Player{
       this.velY=0;
       this.hasJumped= false;
       this.hasDashed = false;
+    }
+    else {
+      this.hasJumped=true;
     }
     if(this.position.x<0)
     {
