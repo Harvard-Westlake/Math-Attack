@@ -6,13 +6,13 @@ export default class Player{
     this.height = 50;
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.maxSpeedX = 5;
+    this.maxSpeedX = 6;
     this.maxSpeedY = 8;
     this.maxDashSpeed=11;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
-    this.stopSlidyCoef = 0.3;
+    this.stopSlidyCoef = 0.4;
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
