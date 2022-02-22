@@ -6,13 +6,14 @@ export default class Player{
     this.height = 50;
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.maxSpeedX = 3.5;
-    this.maxSpeedY = 4;
+    this.maxSpeedX = 5;
+    this.maxSpeedY = 7;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
-    this.stopSlidyCoef = 0.1;
+    this.stopSlidyCoef = 0.3;
     this.hasJumped = false;
+    this.hasDashed = false;
     this.accDown=.2;
 
     this.playerImage = new Image();
@@ -59,6 +60,9 @@ export default class Player{
     this.velY = this.maxSpeedY;
   }
   dash(orientation, orientations){
+    if(this.hasDashed)
+      return;
+    this.hasDashed = true;
     switch(orientation){
       case orientations.left:
         this.position.x-=4*this.width;
@@ -112,6 +116,7 @@ export default class Player{
       this.position.y = this.gameHeight-10-this.height;
       this.velY=0;
       this.hasJumped= false;
+      this.hasDashed = false;
     }
     if(this.position.x<0)
     {
