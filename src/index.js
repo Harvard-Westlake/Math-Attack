@@ -21,6 +21,35 @@ new InputHandler(player);
 
 let lastTime = 0;
 
+class AnimationFrame {
+  constructor(animate, fps = 60) {
+    this.requestID = 0;
+    this.fps = fps;
+    this.animate = animate;
+  }
+
+  start() {
+    let then = performance.now();
+    const interval = 1000 / this.fps;
+
+    const animateLoop = (now) => {
+      this.requestID = requestAnimationFrame(animateLoop);
+      const delta = now - then;
+
+      if (delta > interval) {
+        then = now - (delta % interval);
+        this.animate(delta);
+      }
+    };
+    this.requestID = requestAnimationFrame(animateLoop);
+  }
+
+  stop() {
+    cancelAnimationFrame(this.requestID);
+  }
+
+}
+
 function gameLoop(timestamp){
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
@@ -31,9 +60,12 @@ function gameLoop(timestamp){
   player.draw(ctx);
   player.bullets.forEach((bullet) => {
     bullet.draw(ctx);
-    
+
   });
 
   requestAnimationFrame(gameLoop);
 }
-gameLoop();
+//gameLoop();
+
+let af = new AnimationFrame(gameLoop);
+af.start();
