@@ -12,7 +12,7 @@ export default class Player{
     this.accDown=5;
 
     this.playerImage = new Image();
-    this.playerImage.src = "/images/PlayerDrawUp.jpg";
+    this.playerImage.src = "/images/idleSpriteSheet.png";
     this.position = {
       x: gameWidth/2-this.width/2,
       y: gameHeight-this.height-10,
@@ -52,7 +52,7 @@ export default class Player{
   }
 
   draw(ctx){
-    ctx.drawImage(this.playerImage,0,0, 1046,1597,this.position.x,this.position.y,this.width,this.height);
+    ctx.drawImage(this.playerImage,0,0, 152,36,this.position.x,this.position.y,this.width,this.height);
   }
 
   update(deltaTime){
