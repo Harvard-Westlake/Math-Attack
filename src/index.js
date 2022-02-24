@@ -1,6 +1,7 @@
 import Player from '/src/player.js';
 import InputHandler from '/src/input.js'
 
+
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
 
@@ -19,6 +20,10 @@ new InputHandler(player);
 
 let lastTime = 0;
 
+function fire(){
+  player.fireBullet(ctx);
+}
+
 function gameLoop(timestamp){
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
@@ -30,3 +35,4 @@ function gameLoop(timestamp){
   requestAnimationFrame(gameLoop);
 }
 gameLoop();
+fire();

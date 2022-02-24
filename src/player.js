@@ -10,7 +10,6 @@ export default class Player{
     this.velY = 0;
     this.hasJumped = false;
     this.accDown=5;
-
     this.playerImage = new Image();
     this.playerImage.src = "/images/PlayerDrawUp.jpg";
     this.position = {

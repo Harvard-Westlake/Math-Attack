@@ -86,7 +86,8 @@ export default class InputHandler{
       "up" : 38,
       "down" : 40,
       "shift" : 16,
-      "space" : 32
+      "space" : 32,
+      "fire" : 88
     };
 
     document.addEventListener('keydown', (event)=>{
@@ -94,8 +95,8 @@ export default class InputHandler{
       switch (event.keyCode) {
 
         // Arrow keys for orientation
-        case this.keys.left:
-        case this.keys.right:
+        case this.keys.left: //37
+        case this.keys.right:  //39
           this.keyDown[event.keyCode] = true;
           this.updateUnderlyingOrientation(event.keyCode);
           break;
@@ -105,7 +106,9 @@ export default class InputHandler{
           this.keyDown[event.keyCode] = true;
           this.updateOrientation();
           break;
-
+        case this.keys.fire:
+          this.player.fireBullet();
+          break;
         // Uses only jmp and shift
         case this.keys.jump:
           this.player.jump();
@@ -140,6 +143,7 @@ export default class InputHandler{
       }
     });
   }
+
 
 
 }
