@@ -6,19 +6,10 @@ constructor(){
     this.speedY = 0;
     this.velX = 0;
     this.velY = 0;
+    this.bulletImage = new Image();
+    this.bulletImage.src = "/images/bullet.png";
 }
-  this.keys = {
-    "fire" : 88
-  };
-
-  document.addEventListener('keydown', (event)=>{
-    case this.keys.fire:
-      this.player.fireBullet();
-      break;
-
-      default:
-      break;
-
-    });
-
+    fireBullet(ctx){
+      ctx.drawImage(this.bulletImage, 0, 0, 100, 100);
+    }
 }

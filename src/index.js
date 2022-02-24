@@ -21,7 +21,7 @@ new InputHandler(player);
 let lastTime = 0;
 
 function fire(){
-  player.fireBullet(ctx);
+  Bullet.fireBullet(ctx);
 }
 
 function gameLoop(timestamp){
