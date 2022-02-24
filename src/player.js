@@ -1,3 +1,4 @@
+import Bullet from '/src/bullet.js'
 export default class Player{
   constructor(gameWidth, gameHeight){
     this.gameWidth = gameWidth;
@@ -16,6 +17,7 @@ export default class Player{
       x: gameWidth/2-this.width/2,
       y: gameHeight-this.height-10,
     }
+    this.bullets = [];
 
   }
 
@@ -47,7 +49,9 @@ export default class Player{
     {
         this.position.x+=2*this.width;
     }
-
+  }
+  fireBullet(){
+    this.bullets.push(new Bullet(this.position.x,this.position.y));
   }
 
   draw(ctx){

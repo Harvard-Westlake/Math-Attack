@@ -18,13 +18,8 @@ let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 new InputHandler(player);
 
-new Bullet();
 
 let lastTime = 0;
-
-function fire(){
-  Bullet.fireBullet(ctx);
-}
 
 function gameLoop(timestamp){
   let deltaTime = timestamp - lastTime;
@@ -34,6 +29,11 @@ function gameLoop(timestamp){
   player.update(deltaTime);
 
   player.draw(ctx);
+  player.bullets.forEach((bullet) => {
+    bullet.draw(ctx);
+    
+  });
+
   requestAnimationFrame(gameLoop);
 }
 gameLoop();
