@@ -133,7 +133,15 @@ export default class InputHandler{
         case this.keys.left:
         case this.keys.right:
           this.keyDown[event.keyCode] = false;
-          this.player.stopHorizontal();
+          if (this.keyDown[this.keys.right]==true){
+            this.updateUnderlyingOrientation (this.keys.left);
+          }
+          else if (this.keyDown[this.keys.left]==true){
+            this.updateUnderlyingOrientation (this.keys.left);
+          }
+          else{
+            this.player.stopHorizontal();
+          }
           this.updateOrientation();
           break;
 
