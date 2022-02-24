@@ -87,7 +87,7 @@ export default class InputHandler{
       "down" : 40,
       "shift" : 16,
       "space" : 32,
-      "fire" : 88
+      "fire" : 88,
       "jump" : 90
     };
 
