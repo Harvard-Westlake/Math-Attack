@@ -18,40 +18,70 @@ export default class Player{
     this.playerImage.src = "/images/shadow_dog.png";
     this.spriteWidth = 575; //this is the width of one frame of our animation in our spritesheet
     this.spriteHeight = 523; //this is the width of one frame of our animation in our spritesheet
-    this.frameX = 0; //this denotes how many frames along we are in one animation (0 = first frame, 1 = second frame, and so on)
-    this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
+    //this.frameX = 0; //this denotes how many frames along we are in one animation (0 = first frame, 1 = second frame, and so on)
+    //this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
     this.gameFrame = 0;
     this.staggerFrames = 5; //bigger staggerFrames = slower animation
+    this.playerState = "run" //this variable controls what animation runs, match it to the names in the animationStates variable
     this.spriteAnimations = [];
-    this.animationStates = [
+    this.animationStates = [ //populate this with the diff animation cycles in the order they appear on the spritesheet top to bottom
       {
-        name: "idle",
+        name: "idle", //name of the animation state
         frames: 7 //idle has 7 frames
       },
       {
         name: "jump",
         frames: 7,
+      },
+      {
+        name: "fall",
+        frames: 7,
+      },
+      {
+        name: "run",
+        frames: 9,
+      },
+      {
+        name: "dizzy",
+        frames: 11,
+      },
+      {
+        name: "sit",
+        frames: 5,
+      },
+      {
+        name: "roll",
+        frames: 7,
+      },
+      {
+        name: "bite",
+        frames: 7,
+      },
+      {
+        name: "ko",
+        frames: 12,
+      },
+      {
+        name: "getHit",
+        frames: 4,
       }
     ];
 
 
     this.animationStates.forEach((state, index) => {
-      console.log(state);
       let frames = {
         loc: [],
       }
       for(let j = 0; j < state.frames; j++){ //calculate positionX and positionY depending on which animation you're on
         let positionX = j * this.spriteWidth;
         let positionY = index * this.spriteHeight;
-        console.log(positionX);
-        console.log(positionY);
         frames.loc.push({x: positionX, y: positionY}); //pushing into location array
-        console.log(frames.loc);
+
       }
 
 
       this.spriteAnimations[state.name] = frames.loc; //create a new value in sprite animations with the name of its state and the value of its number of frames
-    });
+    }); //this will population spriteAnimations with each state of animation and corresponding array of each position on the spritesheet for every frame of that state's animation
 
     console.log(this.spriteAnimations);
 
@@ -109,11 +139,17 @@ export default class Player{
 
   draw(ctx){
 
-    let position = Math.floor(this.gameFrame/this.staggerFrames) % 6; //cycles between 0 and 6
-    this.frameX = this.spriteWidth * position;
+    let positionAnimation = Math.floor(this.gameFrame/this.staggerFrames) % this.spriteAnimations[this.playerState].length; //cycles between 0 and 6
+    let frameX = this.spriteWidth * positionAnimation;
+    //console.log(position);
+    console.log(this.spriteAnimations[this.playerState][positionAnimation].y);
+    let frameY = this.spriteAnimations[this.playerState][positionAnimation].y;
+    console.log(frameX);
+
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
-    ctx.drawImage(this.playerImage,this.frameX,this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight,this.position.x,this.position.y, this.width,this.height);
+    ctx.drawImage(this.playerImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
+
 
    //  if(this.gameFrame % this.staggerFrames == 0){ //slows down our animation
    //    if(this.frameX < 6){ //this goes through frames 0-6
