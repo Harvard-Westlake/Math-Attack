@@ -1,3 +1,4 @@
+import Bullet from '/src/bullet.js'
 export default class Player{
 
 
@@ -96,6 +97,7 @@ export default class Player{
       x: gameWidth/2-this.width/2,
       y: gameHeight-this.height-10,
     }
+    this.bullets = [];
 
   }
   updateVelocityX (){
@@ -167,10 +169,9 @@ export default class Player{
         this.velY=-1*this.maxDashSpeed/1.4;
         break;
     }
-
-
-
-
+  }
+  fireBullet(){
+    this.bullets.push(new Bullet(this.position.x,this.position.y));
   }
 
 
