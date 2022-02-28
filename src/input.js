@@ -3,11 +3,12 @@ export default class InputHandler{
   // Sets left or right view direction.  All other directions
   // are set in 'updateOrientation'
   updateUnderlyingOrientation(leftOrRight) {
+    console.log (this.keys.left);
     if (leftOrRight == this.keys.left) {
       this.underlyingOrientation = this.orientations.left;
       this.player.moveLeft();
     }
-    if (leftOrRight == this.keys.right) {
+    else if (leftOrRight == this.keys.right) {
       this.underlyingOrientation = this.orientations.right;
       this.player.moveRight();
     }
@@ -57,7 +58,7 @@ export default class InputHandler{
         break;
 
       default:
-        break;
+        break;x
     }
     // Test Orientation by uncommenting this - orientation code
     console.log("Orientation:" + this.orientation);
@@ -136,7 +137,16 @@ export default class InputHandler{
         case this.keys.left:
         case this.keys.right:
           this.keyDown[event.keyCode] = false;
-          this.player.stopHorizontal();
+          if (event.keyCode == this.keys.right && this.keyDown[this.keys.left]==true){
+            this.updateUnderlyingOrientation (this.keys.left);
+          }
+          else if (event.keyCode == this.keys.left && this.keyDown[this.keys.right]==true){
+            this.updateUnderlyingOrientation (this.keys.right);
+            console.log("pivot right");
+          }
+          else{
+            this.player.stopHorizontal();
+          }
           this.updateOrientation();
           break;
 
