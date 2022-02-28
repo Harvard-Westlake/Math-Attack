@@ -17,6 +17,7 @@ export default class Player{
     this.velY = 0;
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.4;
+    this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
@@ -139,6 +140,7 @@ export default class Player{
     this.velY = this.maxSpeedY;
   }
   dash(orientation, orientations){
+    this.vulnerableTimeLeft = 10;
     if(this.hasDashed)
       return;
     this.hasDashed = true;
@@ -221,6 +223,8 @@ export default class Player{
   update(deltaTime){
     if(!deltaTime)return;
     window.setTimeout(this.updateVelocityX(), 100);
+    window.setTimeout(this.vulnerableTimeLeft-=1, 100);
+
     console.log (this.velX);
     this.position.x+=this.velX;
     this.position.y-=this.velY;
