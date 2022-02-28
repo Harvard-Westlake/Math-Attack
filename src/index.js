@@ -62,8 +62,6 @@ function gameLoop(timestamp){
     bullet.draw(ctx);
 
   });
-
-  requestAnimationFrame(gameLoop);
 }
 //gameLoop();
 
