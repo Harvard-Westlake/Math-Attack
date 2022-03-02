@@ -1,4 +1,4 @@
-export class HealthBar{
+export default class HealthBar{
 constructor(posX, posY,width, height){
   this.width = width;
   this.height = height;
@@ -13,6 +13,14 @@ setHealthPercent(latestHealthPct) {
   this.healthPercent = latestHealthPct;
 }
 
+determineColor() {
+  return 'green';
+}
+
+determineWidth() {
+  return this.width * (this.healthPercent / 100) - 2;
+}
+
 // Draws three rectangles
   // Border
   // Background
@@ -21,12 +29,9 @@ setHealthPercent(latestHealthPct) {
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'gray';
     ctx.lineWidth = 3;
-    ctx.fillRect(this.position.x, this.position.y, this.width, .this.height);
-    ctx.strokeRect(this.position.x, this.position.y, this.width, .this.height);
-    ctx.fillStyle = 'green';
-    ctx.fillRect(this.position.x+1, this.position.y+1, this.width-2, this.height-2);
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+    ctx.fillStyle = this.determineColor();
+    ctx.fillRect(this.position.x+1, this.position.y+1, this.determineWidth(), this.height-2);
   }
 }
-
-const hb = new HealthBar(5,5, 100, 40);
-hb.setHealthPercent(75);
