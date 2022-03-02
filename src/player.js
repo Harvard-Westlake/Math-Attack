@@ -174,7 +174,7 @@ export default class Player{
     }
   }
   fireBullet(orientation, orientations){
-    this.bullets.push(new Bullet(this.position.x,this.position.y, orientation,orientations));
+    this.bullets.push(new Bullet(this.position.x,this.position.y, orientation,orientations, this.gameWidth, this.gameHeight));
   }
 
 
@@ -244,5 +244,15 @@ export default class Player{
     {
       this.position.x=this.gameWidth-this.width;
     }
+    for(let i = 0;i<this.bullets.length;i++)
+    {
+      if(this.bullets[i].needsDelete)
+      {
+        this.bullets.splice(i,1);
+        i--;
+      }
+    }
+    //to see the list of bullets
+    console.log(this.bullets);
   }
 }
