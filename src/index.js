@@ -10,8 +10,9 @@ const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
 
 // Health Bar
-const healthBar = new HealthBar(5,5, 100, 40);
-healthBar.setHealthPercent(75);
+// To Use call healthBar.setHealthPercent(SOME_NUMBER);
+const HEALTH_BAR_WIDTH = 200;
+const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
 
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 

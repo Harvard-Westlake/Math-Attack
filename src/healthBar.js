@@ -14,7 +14,15 @@ setHealthPercent(latestHealthPct) {
 }
 
 determineColor() {
-  return 'green';
+  if (this.healthPercent > 70) {
+    return 'green';
+  } else if (this.healthPercent > 40) {
+    return 'yellow';
+  } else if (this.healthPercent > 20) {
+    return 'orange';
+  } else {
+    return 'red';
+  }
 }
 
 determineWidth() {
