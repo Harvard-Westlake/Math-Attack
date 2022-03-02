@@ -1,6 +1,7 @@
 import Player from '/src/player.js';
 import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
+import HealthBar from '/src/healthBar.js'
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
@@ -8,7 +9,10 @@ let ctx = canvas.getContext('2d');
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
 
-
+// Health Bar
+// To Use call healthBar.setHealthPercent(SOME_NUMBER);
+const HEALTH_BAR_WIDTH = 200;
+const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
 
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
@@ -59,9 +63,14 @@ function gameLoop(timestamp){
 
   player.draw(ctx);
   player.bullets.forEach((bullet) => {
+    bullet.update();
     bullet.draw(ctx);
 
+
   });
+
+  // Draw health bar last
+  healthBar.draw(ctx);
 }
 //gameLoop();
 
