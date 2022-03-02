@@ -57,10 +57,10 @@ export default class InputHandler{
         break;
 
       default:
-        break;x
+        break;
     }
     // Test Orientation by uncommenting this - orientation code
-    console.log("Orientation:" + this.orientation);
+    //console.log("Orientation:" + this.orientation);
   }
 
   constructor(player){
@@ -109,7 +109,7 @@ export default class InputHandler{
           this.updateOrientation();
           break;
         case this.keys.fire:
-          this.player.fireBullet();
+          this.player.fireBullet(this.orientation, this.orientations);
           break;
         // Uses only jmp and shift
         case this.keys.jump:

@@ -63,7 +63,9 @@ function gameLoop(timestamp){
 
   player.draw(ctx);
   player.bullets.forEach((bullet) => {
+    bullet.update();
     bullet.draw(ctx);
+
 
   });
 
