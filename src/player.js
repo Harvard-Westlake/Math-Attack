@@ -17,6 +17,7 @@ export default class Player{
     this.velY = 0;
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.4;
+    this.maxVulnerabilityTime = 15;
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
@@ -92,7 +93,7 @@ export default class Player{
       this.spriteAnimations[state.name] = frames.loc; //create a new value in sprite animations with the name of its state and the value of its number of frames
     }); //this will population spriteAnimations with each state of animation and corresponding array of each position on the spritesheet for every frame of that state's animation
 
-    console.log(this.spriteAnimations);
+    //console.log(this.spriteAnimations);
 
 
     this.position = {
@@ -140,7 +141,7 @@ export default class Player{
     this.velY = this.maxSpeedY;
   }
   dash(orientation, orientations){
-    this.vulnerableTimeLeft = 10;
+    this.vulnerableTimeLeft = this.maxVulnerabilityTime;
     if(this.hasDashed)
       return;
     this.hasDashed = true;
@@ -178,7 +179,11 @@ export default class Player{
   fireBullet(){
     this.bullets.push(new Bullet(this.position.x,this.position.y));
   }
-
+  decreaseVulnerabilityTime(){
+    if (this.vulnerableTimeLeft > 0){
+      this.vulnerableTimeLeft-=1;
+    }
+  }
 
 // spriteAnimations = [
 //   "idle" = {
@@ -197,9 +202,9 @@ export default class Player{
     let positionAnimation = Math.floor(this.gameFrame/this.staggerFrames) % this.spriteAnimations[this.playerState].length; //cycles between 0 and 6
     let frameX = this.spriteWidth * positionAnimation;
     //console.log(position);
-    console.log(this.spriteAnimations[this.playerState][positionAnimation].y);
+    //console.log(this.spriteAnimations[this.playerState][positionAnimation].y);
     let frameY = this.spriteAnimations[this.playerState][positionAnimation].y;
-    console.log(frameX);
+    //console.log(frameX);
 
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
@@ -222,10 +227,16 @@ export default class Player{
 
   update(deltaTime){
     if(!deltaTime)return;
-    window.setTimeout(this.updateVelocityX(), 100);
-    window.setTimeout(this.vulnerableTimeLeft-=1, 100);
+    this.updateVelocityX();
+    this.decreaseVulnerabilityTime();
+    if (this.vulnerableTimeLeft == 0){
 
-    console.log (this.velX);
+    }
+    if (this.vulnerableTimeLeft>0){
+      console.log(this.vulnerableTimeLeft);
+    }
+
+    //console.log (this.velX);
     this.position.x+=this.velX;
     this.position.y-=this.velY;
     this.velY-=this.accDown;
