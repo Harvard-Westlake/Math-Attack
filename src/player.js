@@ -17,6 +17,8 @@ export default class Player{
     this.velY = 0;
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.4;
+    this.maxVulnerabilityTime = 15;
+    this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
@@ -139,6 +141,7 @@ export default class Player{
     this.velY = this.maxSpeedY;
   }
   dash(orientation, orientations){
+    this.vulnerableTimeLeft = this.maxVulnerabilityTime;
     if(this.hasDashed)
       return;
     this.hasDashed = true;
@@ -176,7 +179,11 @@ export default class Player{
   fireBullet(orientation, orientations){
     this.bullets.push(new Bullet(this.position.x,this.position.y, orientation,orientations, this.gameWidth, this.gameHeight));
   }
-
+  decreaseVulnerabilityTime(){
+    if (this.vulnerableTimeLeft > 0){
+      this.vulnerableTimeLeft-=1;
+    }
+  }
 
 // spriteAnimations = [
 //   "idle" = {
@@ -220,7 +227,15 @@ export default class Player{
 
   update(deltaTime){
     if(!deltaTime)return;
-    window.setTimeout(this.updateVelocityX(), 100);
+    this.updateVelocityX();
+    this.decreaseVulnerabilityTime();
+    if (this.vulnerableTimeLeft == 0){
+
+    }
+    if (this.vulnerableTimeLeft>0){
+      console.log(this.vulnerableTimeLeft);
+    }
+
     //console.log (this.velX);
     this.position.x+=this.velX;
     this.position.y-=this.velY;
@@ -253,6 +268,6 @@ export default class Player{
       }
     }
     //to see the list of bullets
-    console.log(this.bullets);
+    //console.log(this.bullets);
   }
 }
