@@ -7,7 +7,7 @@ export default class InputHandler{
       this.underlyingOrientation = this.orientations.left;
       this.player.moveLeft();
     }
-    if (leftOrRight == this.keys.right) {
+    else if (leftOrRight == this.keys.right) {
       this.underlyingOrientation = this.orientations.right;
       this.player.moveRight();
     }
@@ -86,16 +86,19 @@ export default class InputHandler{
       "up" : 38,
       "down" : 40,
       "shift" : 16,
-      "space" : 32
+      "space" : 32,
+      "fire" : 88,
+      "jump" : 90
     };
 
     document.addEventListener('keydown', (event)=>{
 
+      //alert(event.keyCode);
       switch (event.keyCode) {
 
         // Arrow keys for orientation
-        case this.keys.left:
-        case this.keys.right:
+        case this.keys.left: //37
+        case this.keys.right:  //39
           this.keyDown[event.keyCode] = true;
           this.updateUnderlyingOrientation(event.keyCode);
           break;
@@ -105,13 +108,15 @@ export default class InputHandler{
           this.keyDown[event.keyCode] = true;
           this.updateOrientation();
           break;
-
+        case this.keys.fire:
+          this.player.fireBullet(this.orientation, this.orientations);
+          break;
         // Uses only jmp and shift
         case this.keys.jump:
           this.player.jump();
           break;
         case this.keys.shift:
-          this.player.dash();
+          this.player.dash(this.orientation, this.orientations);
           break;
 
         default:
@@ -131,7 +136,15 @@ export default class InputHandler{
         case this.keys.left:
         case this.keys.right:
           this.keyDown[event.keyCode] = false;
-          this.player.stopHorizontal();
+          if (event.keyCode == this.keys.right && this.keyDown[this.keys.left]==true){
+            this.updateUnderlyingOrientation (this.keys.left);
+          }
+          else if (event.keyCode == this.keys.left && this.keyDown[this.keys.right]==true){
+            this.updateUnderlyingOrientation (this.keys.right);
+          }
+          else{
+            this.player.stopHorizontal();
+          }
           this.updateOrientation();
           break;
 
@@ -140,6 +153,7 @@ export default class InputHandler{
       }
     });
   }
+
 
 
 }
