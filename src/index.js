@@ -5,6 +5,9 @@ import HealthBar from '/src/healthBar.js'
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
+let myImg = new Image();
+myImg.src = "./images/backgroundart.jpg";
+
 
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
@@ -15,8 +18,6 @@ const HEALTH_BAR_WIDTH = 200;
 const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
 
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
-
-
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
@@ -61,11 +62,12 @@ function gameLoop(timestamp){
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
   player.update(deltaTime);
 
+  ctx.drawImage(myImg, 0,0);
+
   player.draw(ctx);
   player.bullets.forEach((bullet) => {
     bullet.update();
     bullet.draw(ctx);
-
 
   });
 
