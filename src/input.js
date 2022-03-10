@@ -63,6 +63,7 @@ export default class InputHandler{
     //console.log("Orientation:" + this.orientation);
   }
 
+
   constructor(player){
     this.player = player;
     // Kinda gross but
@@ -94,35 +95,42 @@ export default class InputHandler{
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      switch (event.keyCode) {
+      if (this.player.getIsMovementEnabled() == true)
+      {
+        switch (event.keyCode) {
 
-        // Arrow keys for orientation
-        case this.keys.left: //37
-        case this.keys.right:  //39
-          this.keyDown[event.keyCode] = true;
-          this.updateUnderlyingOrientation(event.keyCode);
-          break;
+          // Arrow keys for orientation
+          case this.keys.left: //37
+          case this.keys.right:  //39
+            this.keyDown[event.keyCode] = true;
+            this.updateUnderlyingOrientation(event.keyCode);
+            break;
 
-        case this.keys.up:
-        case this.keys.down:
-          this.keyDown[event.keyCode] = true;
-          this.updateOrientation();
-          break;
-        case this.keys.fire:
-          this.player.fireBullet(this.orientation, this.orientations);
-          break;
-        // Uses only jmp and shift
-        case this.keys.jump:
-          this.player.jump();
-          break;
-        case this.keys.shift:
-          this.player.dash(this.orientation, this.orientations);
-          break;
+          case this.keys.up:
+          case this.keys.down:
+            this.keyDown[event.keyCode] = true;
+            this.updateOrientation();
+            break;
+          case this.keys.fire:
+            this.player.fireBullet(this.orientation, this.orientations);
+            break;
+          // Uses only jmp and shift
+          case this.keys.jump:
+            this.player.jump();
+            break;
+          case this.keys.shift:
+            this.player.dash(this.orientation, this.orientations);
+            break;
 
-        default:
-          break;
+          default:
+            break;
       }
-    });
+    }
+    else {
+
+    }
+
+      });
 
     document.addEventListener('keyup', (event)=>{
       switch (event.keyCode) {
@@ -152,6 +160,15 @@ export default class InputHandler{
           break;
       }
     });
+  }
+
+  manuallyKeyUpAllButtons()
+  {
+    let self = this;
+    Object.keys(this.keys).forEach(function(k, v){
+      console.log (k + " " + v + " " +self.keyDown[k]);
+    //if (this.keyDown[v] == true)
+});
   }
 
 
