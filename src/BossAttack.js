@@ -57,10 +57,14 @@ export default class BossAttack {
     }
 
     console.log("teleporting to ()"+tpsitex+","+tpsitey+")in relation to playerposition");
-    //teleport to [playerPosition[x] + addx*Math.random()*weapon.getRange() , playerPosition[x] + addy*Math.random()*weapon.getRange() ;
-    if(/*player within range by end of animation==*/true){
+
+    if(this.playerIsInRange()){
       //(setHP(getHP()-weapon.damage));
       console.log("yoink the hp");
     }
+  }
+  playerIsInRange(){
+    //require code here
+    return true;
   }
 }
