@@ -1,9 +1,10 @@
 class Boss {
-  constructor (bossHealth)
+  constructor (bossHealth, weapon)
   {
     this.health;//health as an integer percentage out of 100
     this.Xpos;//x position
     this.Ypos;//y position
+    this.weapon = weapon;
     this.position = {
       x:x,
       y:y,
