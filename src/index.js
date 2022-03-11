@@ -3,14 +3,18 @@ import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
 import HealthBar from '/src/healthBar.js'
 
+const GAME_WIDTH = window.innerWidth;
+const GAME_HEIGHT = window.innerHeight;
+
 let canvas = document.getElementById("gameScreen");
+canvas.width = GAME_WIDTH;
+canvas.height = GAME_HEIGHT;
 let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
 
-const GAME_WIDTH = window.outerWidth;
-const GAME_HEIGHT = window.outerHeight;
+
 
 // Health Bar
 // To Use call healthBar.setHealthPercent(SOME_NUMBER);
@@ -62,7 +66,7 @@ function gameLoop(timestamp){
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
   player.update(deltaTime);
 
-  ctx.drawImage(myImg, 0,0);
+  ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
 
   player.draw(ctx);
   player.bullets.forEach((bullet) => {
