@@ -10,7 +10,6 @@ let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
-
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
 //COMMENT OUT, THIS IS FOR TESTING
@@ -66,9 +65,12 @@ class AnimationFrame {
 }
 
 function gameLoop(timestamp){
+  //update gamestate
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
+
+  //draw
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
   player.update(deltaTime);
 

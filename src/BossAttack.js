@@ -7,8 +7,13 @@ export default class BossAttack {
   constructor(){
 
   }
+  //removable function
   setPosition(position){
     this.playerPosition = [position.x,position.y];
+  }
+  //required function
+  setWeapon(weapon){
+    this.weapon = weapon;
   }
   movementAttack(weapon) {
     //setDirection();
