@@ -167,6 +167,10 @@ export default class InputHandler{
     let self = this;
     Object.keys(this.keys).forEach(function(k, v){
       console.log (k + " " + v + " " +self.keyDown[k]);
+      if (self.keyDown[k] == true)
+      {
+        
+      }
     //if (this.keyDown[v] == true)
 });
   }
