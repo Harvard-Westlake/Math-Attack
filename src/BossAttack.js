@@ -1,3 +1,5 @@
+import BossWeapon from '/src/bossweapon.js'
+import Player from '/src/player.js'
 export default class BossAttack {
   //string direction //determines direction of the attack, string that represents one of the eight cardinal directions
   //boolean hit //true if you hit the boss, false otherwise
@@ -5,7 +7,10 @@ export default class BossAttack {
   constructor(){
 
   }
-  movementAttack(BossWeapon weapon) {
+  setPosition(position){
+    this.playerPosition = [position.x,position.y];
+  }
+  movementAttack(weapon) {
     //setDirection();
   //  windUp();
     let range = weapon.getRange();
@@ -31,25 +36,25 @@ export default class BossAttack {
         addy = -1;
       break;
     }
-    let tpsitex = playerPosition[0]+addx*Math.random()*range;
-    let tpsitey = playerPosition[1]*addy*Math.random()*range;
+    let tpsitex = this.playerPosition[0]+addx*Math.random()*range;
+    let tpsitey = this.playerPosition[1]+addy*Math.random()*range;
     if(tpsitex < 0){
       tpsitex = 0;
     }
-    if(tpsitex>GAME_WIDTH){
-      tpsitex = GAME_WIDTH;
+    if(tpsitex>self.GAME_WIDTH){
+      tpsitex = self.GAME_WIDTH;
     }
     if(tpsitey < 0){
       tpsitey = 0;
     }
-    if(tpsitey>GAME_HEIGHT){
-      tpsitey = GAME_HEIGHT;
+    if(tpsitey>self.GAME_HEIGHT){
+      tpsitey = self.GAME_HEIGHT;
     }
 
-    console.log("teleporting to ()"+tpsitex+","+tpsitex+")in relation to playerposition");
+    console.log("teleporting to ()"+tpsitex+","+tpsitey+")in relation to playerposition");
     //teleport to [playerPosition[x] + addx*Math.random()*weapon.getRange() , playerPosition[x] + addy*Math.random()*weapon.getRange() ;
     if(/*player within range by end of animation==*/true){
-      (setHP(getHP()-weapon.damage));
+      //(setHP(getHP()-weapon.damage));
       console.log("yoink the hp");
     }
   }
