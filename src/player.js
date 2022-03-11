@@ -189,12 +189,12 @@ export default class Player{
     }
   }
 
-  playerDead()
+  die()
   {
     this.isMovementEnabled = false;
   }
 
-  getIsMovementEnabled()
+  isMovementEnabled()
   {
     return this.isMovementEnabled;
   }

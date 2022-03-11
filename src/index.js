@@ -22,7 +22,6 @@ ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 const iH = new InputHandler(player);
-console.log(iH.manuallyKeyUpAllButtons());
 
 
 let lastTime = 0;

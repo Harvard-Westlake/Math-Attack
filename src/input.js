@@ -63,6 +63,18 @@ export default class InputHandler{
     //console.log("Orientation:" + this.orientation);
   }
 
+  manuallyKeyUpAllButtons()
+  {
+    let self = this;
+    Object.keys(this.keys).forEach(function(k, v){
+      if (self.keyDown[k] == true)
+      {
+        const input = document.getElementById("gameScreen");
+        this.input.dispatchEvent(new KeyboardEvent('keyup', {k:v}));
+      }
+});
+  }
+
 
   constructor(player){
     this.player = player;
@@ -89,26 +101,24 @@ export default class InputHandler{
       "shift" : 16,
       "space" : 32,
       "fire" : 88,
+      "end" : 69,
       "jump" : 90
     };
 
-    manuallyKeyUpAllButtons()
-    {
-      let self = this;
-      Object.keys(this.keys).forEach(function(k, v){
-        console.log (k + " " + v + " " +self.keyDown[k]);
-        if (self.keyDown[k] == true)
-        {
-          const input = document.getElementById("gameScreen");
-          this.input.dispatchEvent(new KeyboardEvent('keyup', {k:v}));
-        }
-  });
-    }
+    document.addEventListener('keydown', (event)=>{
+      if (event.keyCode == 69)
+      {
+        console.log("game over");
+        this.player.die();
+        this.manuallyKeyUpAllButtons();
+      }
+    });
+
 
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      if (this.player.getIsMovementEnabled() == true)
+      if (this.player.isMovementEnabled() == true)
       {
         switch (event.keyCode) {
 
@@ -140,10 +150,9 @@ export default class InputHandler{
       }
     }
     else {
-      this.manuallyKeyUpAllButtons();
+
     }
       });
-    }
 
     document.addEventListener('keyup', (event)=>{
       switch (event.keyCode) {
