@@ -5,10 +5,10 @@ export default class BossAttack {
   constructor(){
 
   }
-  movementAttack(/*BossWeapon weapon*/) {
+  movementAttack(BossWeapon weapon) {
     //setDirection();
   //  windUp();
-    let range = /*weapon.getRange()*/9;
+    let range = weapon.getRange();
     //play attack animations
     //move to near playerPosition
     let addx = 1;
@@ -31,10 +31,25 @@ export default class BossAttack {
         addy = -1;
       break;
     }
-    console.log("teleporting to ()"+addx*Math.random()*range+","+addy*Math.random()*range+")in relation to playerposition");
+    let tpsitex = playerPosition[0]+addx*Math.random()*range;
+    let tpsitey = playerPosition[1]*addy*Math.random()*range;
+    if(tpsitex < 0){
+      tpsitex = 0;
+    }
+    if(tpsitex>GAME_WIDTH){
+      tpsitex = GAME_WIDTH;
+    }
+    if(tpsitey < 0){
+      tpsitey = 0;
+    }
+    if(tpsitey>GAME_HEIGHT){
+      tpsitey = GAME_HEIGHT;
+    }
+
+    console.log("teleporting to ()"+tpsitex+","+tpsitex+")in relation to playerposition");
     //teleport to [playerPosition[x] + addx*Math.random()*weapon.getRange() , playerPosition[x] + addy*Math.random()*weapon.getRange() ;
     if(/*player within range by end of animation==*/true){
-      //(setHP(getHP()/*-weapon.damage*/));
+      (setHP(getHP()-weapon.damage));
       console.log("yoink the hp");
     }
   }

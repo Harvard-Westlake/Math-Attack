@@ -15,6 +15,7 @@ const GAME_HEIGHT = 600;
 //COMMENT OUT, THIS IS FOR TESTING
 let a = new BossWeapon(69,true,9000+1);
 console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
+
 // Health Bar
 // To Use call healthBar.setHealthPercent(SOME_NUMBER);
 const HEALTH_BAR_WIDTH = 200;
