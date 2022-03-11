@@ -1,12 +1,28 @@
+
 import BossWeapon from '/src/bossweapon.js'
 import Player from '/src/player.js'
 export default class BossAttack {
   //string direction //determines direction of the attack, string that represents one of the eight cardinal directions
   //boolean hit //true if you hit the boss, false otherwise
   //int [] playerPosition //int array [x, y] position of playerc
-  constructor(){
 
-  }
+    constructor (Player protagonist, Boss antagonist)
+    {
+
+      this.isHit = false;
+      this.direction;
+    }
+    function setDirection ()
+    {
+      if ((Math.sign(antagonist.player.x - protagonist.player.x)) > 0)
+      {
+        this.direction  == "left";
+      }
+      else {
+        this.direction == "right";
+      }
+    }
+
   //removable function
   setPosition(position){
     this.playerPosition = [position.x,position.y];
@@ -67,4 +83,5 @@ export default class BossAttack {
     //require code here
     return true;
   }
+
 }
