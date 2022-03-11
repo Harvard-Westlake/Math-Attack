@@ -2,6 +2,7 @@ import Player from '/src/player.js';
 import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
 import HealthBar from '/src/healthBar.js'
+import BossAttack from '/src/BossAttack.js'
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
@@ -20,7 +21,8 @@ const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_B
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-
+let a = new BossAttack();
+a.movementAttack();
 new InputHandler(player);
 
 
