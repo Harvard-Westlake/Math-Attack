@@ -92,6 +92,19 @@ export default class InputHandler{
       "jump" : 90
     };
 
+    manuallyKeyUpAllButtons()
+    {
+      let self = this;
+      Object.keys(this.keys).forEach(function(k, v){
+        console.log (k + " " + v + " " +self.keyDown[k]);
+        if (self.keyDown[k] == true)
+        {
+          const input = document.getElementById("gameScreen");
+          this.input.dispatchEvent(new KeyboardEvent('keyup', {k:v}));
+        }
+  });
+    }
+
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
@@ -127,10 +140,10 @@ export default class InputHandler{
       }
     }
     else {
-
+      this.manuallyKeyUpAllButtons();
     }
-
       });
+    }
 
     document.addEventListener('keyup', (event)=>{
       switch (event.keyCode) {
@@ -161,20 +174,4 @@ export default class InputHandler{
       }
     });
   }
-
-  manuallyKeyUpAllButtons()
-  {
-    let self = this;
-    Object.keys(this.keys).forEach(function(k, v){
-      console.log (k + " " + v + " " +self.keyDown[k]);
-      if (self.keyDown[k] == true)
-      {
-        
-      }
-    //if (this.keyDown[v] == true)
-});
-  }
-
-
-
 }
