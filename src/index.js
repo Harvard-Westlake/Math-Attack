@@ -9,8 +9,8 @@ let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
 
-const GAME_WIDTH = 1200;
-const GAME_HEIGHT = 600;
+const GAME_WIDTH = window.outerWidth;
+const GAME_HEIGHT = window.outerHeight;
 
 // Health Bar
 // To Use call healthBar.setHealthPercent(SOME_NUMBER);
