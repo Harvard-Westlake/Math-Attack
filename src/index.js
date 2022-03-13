@@ -2,6 +2,7 @@ import Player from '/src/player.js';
 import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
 import HealthBar from '/src/healthBar.js'
+import BossWeapon from '/src/bossweapon.js'
 
 const GAME_WIDTH = window.innerWidth;
 const GAME_HEIGHT = window.innerHeight;
@@ -12,7 +13,6 @@ canvas.height = GAME_HEIGHT;
 let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
-
 
 //disables scrolling
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
