@@ -105,11 +105,12 @@ export default class InputHandler{
       "jump" : 90
     };
 
+    // filler method until collision class can handle death
     document.addEventListener('keydown', (event)=>{
       if (event.keyCode == 69)
       {
-        console.log("game over");
-        this.player.die();
+        console.log("game over, player is dead and can't move");
+        this.player.disableMovement();
         this.manuallyKeyUpAllButtons();
       }
     });
@@ -118,8 +119,9 @@ export default class InputHandler{
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      if (this.player.isMovementEnabled() == true)
+      if (this.player.checkIfMovementEnabled() == true)
       {
+        console.log("movement is enabled");
         switch (event.keyCode) {
 
           // Arrow keys for orientation

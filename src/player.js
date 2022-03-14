@@ -189,12 +189,12 @@ export default class Player{
     }
   }
 
-  die()
+  disableMovement()
   {
     this.isMovementEnabled = false;
   }
 
-  isMovementEnabled()
+  checkIfMovementEnabled()
   {
     return this.isMovementEnabled;
   }
