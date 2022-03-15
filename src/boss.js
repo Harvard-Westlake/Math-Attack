@@ -3,12 +3,13 @@ import BossBullet from '/src/bossBullet.js'
 
 export default class Boss{
 
-  constructor (bossHealth, player, gameWidth, gameHeight)
+  constructor (bossHealth, player, gameWidth, gameHeight, weapon)
   {
     this.player=player;
     this.gameWidth=gameWidth;
     this.gameHeight=gameHeight;
-    this.health;//health as an integer percentage out of 100
+    this.health = bossHealth;
+    this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
       y:540,
