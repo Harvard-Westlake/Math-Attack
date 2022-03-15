@@ -3,8 +3,10 @@ export default class Boss {
   constructor (bossHealth)
   {
     this.health = 100;//health as an integer percentage out of 100
-    this.Xpos;//x position
-    this.Ypos;//y position
+    this.posX;//x position
+    this.posY;//y position
+    this.velX;//x velocity
+    this.velY;//y velocity
     this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
 
