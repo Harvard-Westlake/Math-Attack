@@ -3,7 +3,7 @@ import BossBullet from '/src/bossBullet.js'
 
 export default class Boss{
 
-  constructor (bossHealth, player, gameWidth, gameHeight)
+  constructor (bossHealth, player, gameWidth, gameHeight, weapon)
   {
     this.player=player;
     this.gameWidth=gameWidth;
