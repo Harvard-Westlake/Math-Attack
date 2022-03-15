@@ -18,6 +18,7 @@ let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
+
 //disables scrolling
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
 
@@ -56,11 +57,27 @@ const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_B
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+
+//testing
+let a = new BossWeapon(69,true,9000+1);
+let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+
 
 let b = new BossAttack(player,boss);
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 b.setPosition(player.position);
-//b.movementAttack(a);
+b.movementAttack();
+
+
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
+boss.position= {x:player.position.x, y:player.position.y};
+console.log("boss location ",boss.position)
+player.position.x=player.position.x-10;
+console.log(player.position);
+b.setDirection();
+player.position.x=player.position.x+20;
+console.log(player.position);
+b.setDirection();
 
 new InputHandler(player);
 new BossInputHandler(boss);
