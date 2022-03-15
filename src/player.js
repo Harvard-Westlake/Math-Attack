@@ -9,6 +9,7 @@ export default class Player{
     this.height = 50;
     this.isMovingLeft = false;
     this.isMovingRight = false;
+    this.isMovementEnabled = true;
 
     this.maxSpeedX = 6;
     this.maxSpeedY = 8;
@@ -22,6 +23,9 @@ export default class Player{
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
+    this.remainingHealthHearts = 3;
+    this.projectileDamage = 10; //filler value
+    this.meleeDamage = 10; //filler value
 
     //animation vars
     this.playerImage = new Image();
@@ -185,6 +189,16 @@ export default class Player{
     }
   }
 
+  disableMovement()
+  {
+    this.isMovementEnabled = false;
+  }
+
+  checkIfMovementEnabled()
+  {
+    return this.isMovementEnabled;
+  }
+
 // spriteAnimations = [
 //   "idle" = {
 //     loc: [
@@ -267,7 +281,9 @@ export default class Player{
         i--;
       }
     }
+
     //to see the list of bullets
     //console.log(this.bullets);
   }
+
 }

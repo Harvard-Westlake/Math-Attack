@@ -63,6 +63,19 @@ export default class InputHandler{
     //console.log("Orientation:" + this.orientation);
   }
 
+  manuallyKeyUpAllButtons()
+  {
+    let self = this;
+    Object.keys(this.keys).forEach(function(k, v){
+      if (self.keyDown[k] == true)
+      {
+        const input = document.getElementById("gameScreen");
+        this.input.dispatchEvent(new KeyboardEvent('keyup', {k:v}));
+      }
+});
+  }
+
+
   constructor(player){
     this.player = player;
     // Kinda gross but
@@ -88,41 +101,60 @@ export default class InputHandler{
       "shift" : 16,
       "space" : 32,
       "fire" : 88,
+      "end" : 69,
       "jump" : 90
     };
+
+    // filler method until collision class can handle death
+    document.addEventListener('keydown', (event)=>{
+      if (event.keyCode == 69)
+      {
+        console.log("game over, player is dead and can't move");
+        this.player.disableMovement();
+        this.manuallyKeyUpAllButtons();
+      }
+    });
+
 
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      switch (event.keyCode) {
+      if (this.player.checkIfMovementEnabled() == true)
+      {
+        console.log("movement is enabled");
+        switch (event.keyCode) {
 
-        // Arrow keys for orientation
-        case this.keys.left: //37
-        case this.keys.right:  //39
-          this.keyDown[event.keyCode] = true;
-          this.updateUnderlyingOrientation(event.keyCode);
-          break;
+          // Arrow keys for orientation
+          case this.keys.left: //37
+          case this.keys.right:  //39
+            this.keyDown[event.keyCode] = true;
+            this.updateUnderlyingOrientation(event.keyCode);
+            break;
 
-        case this.keys.up:
-        case this.keys.down:
-          this.keyDown[event.keyCode] = true;
-          this.updateOrientation();
-          break;
-        case this.keys.fire:
-          this.player.fireBullet(this.orientation, this.orientations);
-          break;
-        // Uses only jmp and shift
-        case this.keys.jump:
-          this.player.jump();
-          break;
-        case this.keys.shift:
-          this.player.dash(this.orientation, this.orientations);
-          break;
+          case this.keys.up:
+          case this.keys.down:
+            this.keyDown[event.keyCode] = true;
+            this.updateOrientation();
+            break;
+          case this.keys.fire:
+            this.player.fireBullet(this.orientation, this.orientations);
+            break;
+          // Uses only jmp and shift
+          case this.keys.jump:
+            this.player.jump();
+            break;
+          case this.keys.shift:
+            this.player.dash(this.orientation, this.orientations);
+            break;
 
-        default:
-          break;
+          default:
+            break;
       }
-    });
+    }
+    else {
+
+    }
+      });
 
     document.addEventListener('keyup', (event)=>{
       switch (event.keyCode) {
@@ -153,7 +185,4 @@ export default class InputHandler{
       }
     });
   }
-
-
-
 }
