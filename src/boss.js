@@ -13,6 +13,10 @@ export default class Boss{
       x:930,
       y:540,
     };//x and y position
+    this.velocity = {
+      x:0,
+      y:0,
+    }
     this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
     this.bossBullets = [];
