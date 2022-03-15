@@ -1,5 +1,5 @@
-class Boss {
-  constructor (bossHealth)
+export default class Boss {
+  constructor (x,y,bossHealth)
   {
     this.health;//health as an integer percentage out of 100
     this.Xpos;//x position
@@ -11,7 +11,7 @@ class Boss {
     this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
 
-    setInterval (updateHealthBar, 10);//continuously ensures that health bar on screen is accurate to real health percentage
+  /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
 
   updateHealthBar()//updates the health bar displayed on screen
