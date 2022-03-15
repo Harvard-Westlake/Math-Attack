@@ -32,11 +32,14 @@ export default class BossAttack {
     this.weapon = weapon;
   }
   movementAttack(weapon) {
-    //setDirection();
-  //  windUp();
+    this.setDirection();
+  //  this.windUp();
+    console.log("winding up lol");
+
     let range = weapon.getRange();
     //play attack animations
     //move to near playerPosition
+    //i'm paid per line right
     let addx = 1;
     let addy = 1;
     let plusorminus = Math.round(Math.random());
