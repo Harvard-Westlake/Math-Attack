@@ -2,10 +2,17 @@ export default class BossBullet{
 
   constructor(x, y, Xdiff, Ydiff, gameWidth,gameHeight){
 
-    this.width = 20;
-    this.height = 20;
-    this.velX = 10;//20*Math.cos(Math.atan(Ydiff,Xdiff));
-    this.velY = 0;//20*Math.sin(Math.atan(Ydiff,Xdiff));
+    this.width = 30;
+    this.height = 30;
+    this.Xdiff=Xdiff;
+    this.Ydiff=Ydiff;
+    console.log("X: "+Xdiff);
+    console.log("Y: "+Ydiff);
+    this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));//20*Math.cos(Math.atan(Ydiff,Xdiff));
+    this.velY = 23*Math.sin(Math.atan2(Ydiff,Xdiff));//20*Math.sin(Math.atan(Ydiff,Xdiff));
+    console.log("XVel: "+this.velX);
+    console.log("YVel: "+this.velY);
+    console.log("Rad: "+Math.atan(Ydiff,Xdiff));
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.bulletImage = new Image();
@@ -22,10 +29,12 @@ export default class BossBullet{
   }
 
   update(){
-    this.position.x-=this.velX;
-    this.position.y-=this.velY;
+    //if(this.Xdiff>=0 && this.Ydiff>=0){
+      this.position.x-=this.velX;
+      this.position.y-=this.velY;
 
-    console.log(this.position.x);
+
+
 
     if(this.position.y>=this.gameHeight)
     {

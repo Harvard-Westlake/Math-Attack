@@ -3,9 +3,11 @@ import BossBullet from '/src/bossBullet.js'
 
 export default class Boss{
 
-  constructor (bossHealth, player)
+  constructor (bossHealth, player, gameWidth, gameHeight)
   {
-    this.player=player
+    this.player=player;
+    this.gameWidth=gameWidth;
+    this.gameHeight=gameHeight;
     this.health;//health as an integer percentage out of 100
     this.position = {
       x:930,
@@ -29,8 +31,8 @@ export default class Boss{
 
   projectileAttack(){
     console.log('boss attack');
-    this.Xdiff=this.Xpos-this.player.position.x;
-    this.Ydiff=this.Ypos-this.player.position.y;
+    this.Xdiff=this.position.x-this.player.position.x;
+    this.Ydiff=this.position.y-this.player.position.y;
 
     this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight));
 

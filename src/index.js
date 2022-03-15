@@ -23,7 +23,7 @@ const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_B
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-let boss = new Boss(100,player);
+let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
 
 new InputHandler(player);
 new BossInputHandler(boss);

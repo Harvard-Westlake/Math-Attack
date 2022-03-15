@@ -267,7 +267,9 @@ export default class Player{
         i--;
       }
     }
+
     //to see the list of bullets
     //console.log(this.bullets);
   }
+
 }
