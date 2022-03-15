@@ -34,7 +34,7 @@ export default class Boss{
     this.Xdiff=this.position.x-this.player.position.x;
     this.Ydiff=this.position.y-this.player.position.y;
 
-    this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight));
+    this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
 
   }
 
