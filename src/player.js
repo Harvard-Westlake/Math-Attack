@@ -27,6 +27,12 @@ export default class Player{
     this.projectileDamage = 10; //filler value
     this.meleeDamage = 10; //filler value
 
+    //playerHealthBar vars
+    this.playerHealth = 3;
+    this.playerHealthImage = new Image();
+    this.playerHealthImage = "/images/playerhealthbar.png"
+    //find length and width of playerhealthbar.png
+
     //animation vars
     this.playerImage = new Image();
     this.playerImage.src = "/images/shadow_dog.png";
@@ -107,6 +113,14 @@ export default class Player{
     this.bullets = [];
 
   }
+
+  loseHealth()
+  {
+    console.logt(playerHealth);
+    this.playerHealth--;
+    console.log(playerHealth);
+  }
+
   updateVelocityX (){
     if (this.isMovingRight == true && Math.abs(this.velX) < (this.maxSpeedX)){
       this.velX+=this.runSlidyCoef;
@@ -223,7 +237,8 @@ export default class Player{
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
     ctx.drawImage(this.playerImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
-
+    //draw playerhealthbar.png
+    //ctx.drawImage(this.playerHealthImage)
 
    //  if(this.gameFrame % this.staggerFrames == 0){ //slows down our animation
    //    if(this.frameX < 6){ //this goes through frames 0-6
