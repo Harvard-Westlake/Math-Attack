@@ -5,14 +5,15 @@ export default class Player{
   constructor(gameWidth, gameHeight){
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.width = 50;
-    this.height = 50;
+    this.width = gameWidth*0.041667;
+    this.height = gameHeight*0.0833;
     this.isMovingLeft = false;
     this.isMovingRight = false;
+    this.isMovementEnabled = true;
 
-    this.maxSpeedX = 6;
-    this.maxSpeedY = 8;
-    this.maxDashSpeed=11;
+    this.maxSpeedX = gameWidth*0.005;
+    this.maxSpeedY = gameHeight*0.0133;
+    this.maxDashSpeed=gameWidth*0.0091667;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
@@ -22,13 +23,22 @@ export default class Player{
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
+    this.remainingHealthHearts = 3;
+    this.projectileDamage = 10; //filler value
+    this.meleeDamage = 10; //filler value
+
+    //playerHealthBar vars
+    this.playerHealth = 3;
+    this.playerHealthImage = new Image();
+    this.playerHealthImage = "/images/playerhealthbar.png"
+    //find length and width of playerhealthbar.png
 
     //animation vars
     this.playerImage = new Image();
     this.playerImage.src = "/images/shadow_dog.png";
     this.spriteWidth = 575; //this is the width of one frame of our animation in our spritesheet
     this.spriteHeight = 523; //this is the width of one frame of our animation in our spritesheet
-    //this.frameX = 0; //this denotes how many frames along we are in one animation (0 = first frame, 1 = second frame, and so on)
+    //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
     //this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
     this.gameFrame = 0;
     this.staggerFrames = 5; //bigger staggerFrames = slower animation
@@ -103,6 +113,14 @@ export default class Player{
     this.bullets = [];
 
   }
+
+  loseHealth()
+  {
+    console.logt(playerHealth);
+    this.playerHealth--;
+    console.log(playerHealth);
+  }
+
   updateVelocityX (){
     if (this.isMovingRight == true && Math.abs(this.velX) < (this.maxSpeedX)){
       this.velX+=this.runSlidyCoef;
@@ -185,6 +203,16 @@ export default class Player{
     }
   }
 
+  disableMovement()
+  {
+    this.isMovementEnabled = false;
+  }
+
+  checkIfMovementEnabled()
+  {
+    return this.isMovementEnabled;
+  }
+
 // spriteAnimations = [
 //   "idle" = {
 //     loc: [
@@ -209,7 +237,8 @@ export default class Player{
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
     ctx.drawImage(this.playerImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
-
+    //draw playerhealthbar.png
+    //ctx.drawImage(this.playerHealthImage)
 
    //  if(this.gameFrame % this.staggerFrames == 0){ //slows down our animation
    //    if(this.frameX < 6){ //this goes through frames 0-6
@@ -267,7 +296,9 @@ export default class Player{
         i--;
       }
     }
+
     //to see the list of bullets
     //console.log(this.bullets);
   }
+
 }
