@@ -23,14 +23,13 @@ export default class Player{
     this.hasJumped = false;
     this.hasDashed = false;
     this.accDown=.3;
-    this.remainingHealthHearts = 3;
     this.projectileDamage = 10; //filler value
     this.meleeDamage = 10; //filler value
 
     //playerHealthBar vars
-    this.playerHealth = 3;
+    this.remainingHealthHearts = 1;
     this.playerHealthImage = new Image();
-    this.playerHealthImage = "/images/playerhealthbar.png"
+    this.playerHealthImage.src = "/images/playerhealthbar.png";
     //find length and width of playerhealthbar.png
 
     //animation vars
@@ -116,9 +115,9 @@ export default class Player{
 
   loseHealth()
   {
-    console.logt(playerHealth);
-    this.playerHealth--;
-    console.log(playerHealth);
+    console.log(this.remainingHealthHearts);
+    this.remainingHealthHearts--;
+    console.log(this.remainingHealthHearts);
   }
 
   updateVelocityX (){
@@ -225,6 +224,9 @@ export default class Player{
 //
 // ]
 
+  drawHealth(ctx){
+    ctx.drawImage(this.playerHealthImage, 0,30+55*(3-this.remainingHealthHearts),225,55,5,5,225,55);
+  }
   draw(ctx){
 
     let positionAnimation = Math.floor(this.gameFrame/this.staggerFrames) % this.spriteAnimations[this.playerState].length; //cycles between 0 and 6
@@ -237,8 +239,10 @@ export default class Player{
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
     ctx.drawImage(this.playerImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
+
+
     //draw playerhealthbar.png
-    //ctx.drawImage(this.playerHealthImage)
+    //ctx.drawImage(this.playerHealthImage, 225,75*(3-this.remainingHealthHearts),225,75,10,10);
 
    //  if(this.gameFrame % this.staggerFrames == 0){ //slows down our animation
    //    if(this.frameX < 6){ //this goes through frames 0-6

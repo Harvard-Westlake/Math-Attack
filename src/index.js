@@ -116,6 +116,9 @@ function gameLoop(timestamp){
 
   });
 
+
+  player.drawHealth(ctx);
+  
   boss.draw(ctx);
   boss.bossBullets.forEach((bullet) => {
     bullet.update();
