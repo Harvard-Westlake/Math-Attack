@@ -30,7 +30,7 @@ export default class Boss{
   }
 
   projectileAttack(){
-    console.log('boss attack');
+    //console.log('boss attack');
     this.Xdiff=this.position.x-this.player.position.x;
     this.Ydiff=this.position.y-this.player.position.y;
 

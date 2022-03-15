@@ -6,13 +6,8 @@ export default class BossBullet{
     this.height = 30;
     this.Xdiff=Xdiff;
     this.Ydiff=Ydiff;
-    console.log("X: "+Xdiff);
-    console.log("Y: "+Ydiff);
     this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));
     this.velY = 23*Math.sin(Math.atan2(Ydiff,Xdiff));
-    console.log("XVel: "+this.velX);
-    console.log("YVel: "+this.velY);
-    console.log("Rad: "+Math.atan(Ydiff,Xdiff));
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.bulletImage = new Image();
@@ -23,6 +18,12 @@ export default class BossBullet{
       x:x,
       y:y,
     };
+    
+    //console.log("X: "+Xdiff);
+    //console.log("Y: "+Ydiff);
+    //console.log("XVel: "+this.velX);
+    //console.log("YVel: "+this.velY);
+    //console.log("Rad: "+Math.atan(Ydiff,Xdiff));
   }
 
   draw(ctx){
