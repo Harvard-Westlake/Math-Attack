@@ -17,6 +17,7 @@ export default class Boss{
     this.healthBar = bossHealth;
     this.bossBullets = [];
 
+  /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
 
   updateHealthBar()//updates the health bar displayed on screen
@@ -55,3 +56,4 @@ export default class Boss{
   }
 
 }
+//test gigalmao how the fuck did this happen

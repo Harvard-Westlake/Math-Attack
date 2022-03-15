@@ -6,18 +6,19 @@ import Boss from '/src/boss.js'
 import BossBullet from '/src/bossBullet.js'
 import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
+import BossAttack from '/src/bossattack.js'
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
-
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
 //COMMENT OUT, THIS IS FOR TESTING
 let a = new BossWeapon(69,true,9000+1);
 console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
+
 // Health Bar
 // To Use call healthBar.setHealthPercent(SOME_NUMBER);
 const HEALTH_BAR_WIDTH = 200;
@@ -27,6 +28,10 @@ ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+
+let b = new BossAttack(player,boss);
+b.setPosition(player.position);
+b.movementAttack(a);
 
 new InputHandler(player);
 new BossInputHandler(boss);
@@ -63,9 +68,12 @@ class AnimationFrame {
 }
 
 function gameLoop(timestamp){
+  //update gamestate
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
+
+  //draw
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
   player.update(deltaTime);
   boss.update(deltaTime);
