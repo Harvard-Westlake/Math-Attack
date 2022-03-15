@@ -3,6 +3,8 @@ import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
 import HealthBar from '/src/healthBar.js'
 import Boss from '/src/boss.js'
+import BossBullet from '/src/bossBullet.js'
+import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 
@@ -25,14 +27,14 @@ const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_B
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-let boss = new Boss(25,25,69);
-//testing code
+let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+
 let b = new BossAttack(player,boss);
 b.setPosition(player.position);
 b.movementAttack(a);
 
-const iH = new InputHandler(player);
-
+new InputHandler(player);
+new BossInputHandler(boss);
 
 let lastTime = 0;
 
@@ -74,6 +76,7 @@ function gameLoop(timestamp){
   //draw
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
   player.update(deltaTime);
+  boss.update(deltaTime);
 
   ctx.drawImage(myImg, 0,0);
 
@@ -82,6 +85,12 @@ function gameLoop(timestamp){
     bullet.update();
     bullet.draw(ctx);
 
+  });
+
+  boss.draw(ctx);
+  boss.bossBullets.forEach((bullet) => {
+    bullet.update();
+    bullet.draw(ctx);
   });
 
   // Draw health bar last
