@@ -24,7 +24,7 @@ ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
-new InputHandler(player);
+const iH = new InputHandler(player);
 
 
 let lastTime = 0;
