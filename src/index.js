@@ -78,6 +78,7 @@ b.setDirection();
 player.position.x=player.position.x+20;
 console.log(player.position);
 b.setDirection();
+b.meleeAttack();
 
 new InputHandler(player);
 new BossInputHandler(boss);

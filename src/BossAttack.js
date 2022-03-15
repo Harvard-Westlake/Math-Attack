@@ -27,22 +27,24 @@ export default class BossAttack {
     }
   }
   meleeAttack() {
-    var weapon = antagonist.weapon;
-    setDirection()
-    //windUp()
-    if (checkIfHit()) {
-      this.lifePoints.setHealthPercent(this.lifePoints.healthPercent - weapon.getDamage());
+    var weapon = this.antagonist.weapon;
+    this.setDirection()
+    //this.windUp()
+    console.log("melee attack called wound up going in direction ",this.direction);
+    if (this.checkIfHit()) {
+      //this.lifePoints.setHealthPercent(this.lifePoints.healthPercent - weapon.getDamage());
+      console.log("yoink hp melee")
     }
     //play meleeAttack animation in corresponding direction
 
   }
   checkIfHit() {
     if (this.direction == "left") {
-      if ((this.antagonist.player.x - this.antagonist.weapon.range) <= this.protagonist.player.x) {
+      if ((this.antagonist.position.x - this.antagonist.weapon.range) <= this.protagonist.position.x) {
         return true;
       }
     } else {
-      if ((this.antagonist.player.x + this.antagonist.weapon.range) >= this.protagonist.player.x) {
+      if ((this.antagonist.position.x + this.antagonist.weapon.range) >= this.protagonist.position.x) {
         return true;
       }
     }
