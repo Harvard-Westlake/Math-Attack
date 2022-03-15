@@ -48,10 +48,9 @@ window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-
 // Health Bar
 // To Use call healthBar.setHealthPercent(SOME_NUMBER);
-const HEALTH_BAR_WIDTH = 200;
+const HEALTH_BAR_WIDTH = GAME_WIDTH*0.15;
 const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
 
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -61,7 +60,7 @@ let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
 
 let b = new BossAttack(player,boss);
 b.setPosition(player.position);
-b.movementAttack(a);
+//b.movementAttack(a);
 
 new InputHandler(player);
 new BossInputHandler(boss);
