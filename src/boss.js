@@ -13,6 +13,10 @@ export default class Boss{
       x:930,
       y:540,
     };//x and y position
+    this.velocity = {
+      x:0,
+      y:0,
+    }
     this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
     this.bossBullets = [];
@@ -23,6 +27,7 @@ export default class Boss{
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.health);
+    console.log ('boss health bar updated');
   }
 
   setHealth(damage) //sets Health to a new percentage if it has changed
