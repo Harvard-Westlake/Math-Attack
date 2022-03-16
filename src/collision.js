@@ -1,4 +1,4 @@
-export default class collision{
+export default class Collision{
 
   constructor(obj, obj2)
   {
@@ -6,19 +6,39 @@ export default class collision{
       x : 5,
       y : 8,
       height : 2,
-      width : 4;
+      width : 4
     };
 
     this.obj2 = {
       x : 7,
       y : 5,
       height : 3,
-      width : 2;
+      width : 2
     };
   }
 
-  checkForCollision()
+  formatPlayerPositionAndSize(player) {
+    return {
+      x: player.position.x,
+      y: player.position.y,
+      height: player.height,
+      width: player.width
+    }
+  }
+
+  formatBulletPositionAndSize(bullet) {
+    return {
+      x: bullet.position.x,
+      y: bullet.position.y,
+      height: bullet.height,
+      width: bullet.width
+    }
+  }
+
+  checkForCollision(a, b)
   {
+    this.xWindow1 = a;
+    this.xWindow2 = b;
     this.xCollision = false;
     this.xWindow1 = this.obj.x + this.obj.width;
     this.xWindow2 = this.obj2.x + this.obj2.width;

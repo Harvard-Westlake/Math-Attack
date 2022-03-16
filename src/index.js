@@ -7,6 +7,7 @@ import BossBullet from '/src/bossBullet.js'
 import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
+import Collision from '/src/collision.js'
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
@@ -37,12 +38,11 @@ new InputHandler(player);
 new BossInputHandler(boss);
 
 let lastTime = 0;
-
-class AnimationFrame {
-  constructor(animate, fps = 60) {
+class Game {
+  constructor(fps = 60) {
     this.requestID = 0;
     this.fps = fps;
-    this.animate = animate;
+    this.collisionChecker = new Collision();
   }
 
   start() {
@@ -55,7 +55,7 @@ class AnimationFrame {
 
       if (delta > interval) {
         then = now - (delta % interval);
-        this.animate(delta);
+        this.gameLoop(delta);
       }
     };
     this.requestID = requestAnimationFrame(animateLoop);
@@ -65,38 +65,71 @@ class AnimationFrame {
     cancelAnimationFrame(this.requestID);
   }
 
+  gameLoop(timestamp){
+    //update gamestate
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // Update All Game Objects
+    player.update(deltaTime);
+    boss.update(deltaTime);
+    player.bullets.forEach((bullet) => {
+      bullet.update();
+    });
+    boss.bossBullets.forEach((bullet) => {
+      bullet.update();
+    });
+
+    // Check collisions
+    this.checkCollisions();
+
+    // Draw
+    ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+    ctx.drawImage(myImg, 0,0);
+
+    player.draw(ctx);
+    player.bullets.forEach((bullet) => {
+      bullet.draw(ctx);
+
+    });
+
+    boss.draw(ctx);
+    boss.bossBullets.forEach((bullet) => {
+      bullet.draw(ctx);
+    });
+
+    // Draw health bar last
+    healthBar.draw(ctx);
+  }
+
+  // Checks collisions for:
+  //    player and bossBullets
+  //    boss and playerBullets
+  checkCollisions() {
+    let self = this;
+
+    // Check Player is hit by Boss Bullets
+    let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
+    boss.bossBullets.forEach((bullet) => {
+      let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
+      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
+        // Remove Bullet
+        console.log('hit');
+        // Damage Player
+      }
+    });
+    let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
+    player.bullets.forEach((bullet) => {
+      let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
+      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, bossPositionAndSize)) {
+        // Remove Bullet
+        console.log('hit');
+        // Damage Player
+      }
+    });
+  }
 }
 
-function gameLoop(timestamp){
-  //update gamestate
-  let deltaTime = timestamp - lastTime;
-  lastTime = timestamp;
-
-
-  //draw
-  ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
-  player.update(deltaTime);
-  boss.update(deltaTime);
-
-  ctx.drawImage(myImg, 0,0);
-
-  player.draw(ctx);
-  player.bullets.forEach((bullet) => {
-    bullet.update();
-    bullet.draw(ctx);
-
-  });
-
-  boss.draw(ctx);
-  boss.bossBullets.forEach((bullet) => {
-    bullet.update();
-    bullet.draw(ctx);
-  });
-
-  // Draw health bar last
-  healthBar.draw(ctx);
-}
-//gameLoop();
-
-let af = new AnimationFrame(gameLoop);
+// Create and start game
+let af = new Game();
 af.start();
