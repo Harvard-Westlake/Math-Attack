@@ -50,8 +50,6 @@ window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
-ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
-
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 //testing
@@ -127,7 +125,7 @@ class Game {
 
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
-    ctx.drawImage(myImg, 0,0);
+    ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
 
     player.draw(ctx);
     player.bullets.forEach((bullet) => {
