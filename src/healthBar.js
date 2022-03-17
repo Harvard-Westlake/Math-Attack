@@ -57,13 +57,15 @@ determineLineWidth() {
   draw(ctx){
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'gray';
-    ctx.lineWidth = this.determineLineWidth();
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+    let lineWidth = this.determineLineWidth();
+    let lineWidthOffset = (window.innerWidth - (this.width + (2*lineWidth) + this.position.x));
+    ctx.lineWidth = lineWidth;
+    ctx.fillRect(this.position.x + lineWidthOffset, this.position.y, this.width, this.height);
+    ctx.strokeRect(this.position.x + lineWidthOffset, this.position.y, this.width, this.height);
 
     if (this.healthPercent != 0) {
       ctx.fillStyle = this.determineColor();
-      ctx.fillRect(this.position.x+1, this.position.y+1, this.determineWidth(), this.height-2);
+      ctx.fillRect(this.position.x + lineWidthOffset+1, this.position.y+1, this.determineWidth(), this.height-2);
     }
   }
 }
