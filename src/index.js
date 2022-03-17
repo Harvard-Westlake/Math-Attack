@@ -8,26 +8,73 @@ import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 import Collision from '/src/collision.js'
 
+const GAME_WIDTH = window.innerWidth;
+const GAME_HEIGHT = window.innerHeight;
+
 let canvas = document.getElementById("gameScreen");
+canvas.width = GAME_WIDTH;
+canvas.height = GAME_HEIGHT;
 let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
 
-const GAME_WIDTH = 1200;
-const GAME_HEIGHT = 600;
-//COMMENT OUT, THIS IS FOR TESTING
-let a = new BossWeapon(69,true,9000+1);
-console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 
+//disables scrolling
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  if (keys[e.keyCode]) {
+    preventDefault(e);
+    return false;
+  }
+}
+
+// modern Chrome requires { passive: false } when adding event
+var supportsPassive = false;
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+    get: function () { supportsPassive = true; }
+  }));
+} catch(e) {}
+
+var wheelOpt = supportsPassive ? { passive: false } : false;
+var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+// call this to Disable
+window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
 ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+
+//testing
+let a = new BossWeapon(69,true,9000+1);
+let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+
 
 let b = new BossAttack(player,boss);
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 b.setPosition(player.position);
-b.movementAttack(a);
+b.movementAttack();
+
+
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
+boss.position= {x:player.position.x, y:player.position.y};
+console.log("boss location ",boss.position)
+player.position.x=player.position.x-10;
+console.log(player.position);
+b.setDirection();
+player.position.x=player.position.x+20;
+console.log(player.position);
+b.setDirection();
+b.meleeAttack();
 
 new InputHandler(player);
 new BossInputHandler(boss);

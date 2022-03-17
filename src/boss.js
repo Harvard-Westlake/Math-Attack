@@ -4,14 +4,16 @@ import HealthBar from '/src/HealthBar.js'
 
 export default class Boss{
 
-  constructor (bossHealth, player, gameWidth, gameHeight)
+  constructor (bossHealth, player, gameWidth, gameHeight, weapon)
   {
     this.player=player;
     this.gameWidth=gameWidth;
     this.gameHeight=gameHeight;
+
     this.health = bossHealth; // Health is a certain amount of HP
     this.healthMax = bossHealth;
     this.healthPct = 100; // Integer out of 100
+    this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
       y:540,
