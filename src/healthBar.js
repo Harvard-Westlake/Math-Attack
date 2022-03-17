@@ -6,7 +6,7 @@ constructor(posX, posY,width, height){
     x:posX,
     y:posY,
   };
-  this.healthPercent = 100;
+  this.healthPercent=100;
 }
 
 setHealthPercent(latestHealthPct) {

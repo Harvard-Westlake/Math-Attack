@@ -57,6 +57,7 @@ ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+console.log(boss);
 
 let b = new BossAttack(player,boss);
 b.setPosition(player.position);
@@ -118,7 +119,7 @@ function gameLoop(timestamp){
 
 
   player.drawHealth(ctx);
-  
+
   boss.draw(ctx);
   boss.bossBullets.forEach((bullet) => {
     bullet.update();

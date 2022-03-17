@@ -17,11 +17,56 @@ export default class Boss{
       x:0,
       y:0,
     }
-    this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
     this.bossBullets = [];
 
+    this.maxSpeed=5;//maximum speed
+    this.movementFrequency=300; //in milliseconds
+
+    this.currVelocity;
+    this.velocityDirection;
+    this.isMoving;
+    this.timeLastMovementChanged=0;
+
+
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
+  }
+
+  determineVelocityDirection()//determines the direction of the boss's velocity
+  {
+    if ((Date.now()-this.timeLastMovementChanged>this.movementFrequency))
+    {
+      if ((this.positionX>(this.gameWidth*.1))&&(this.positionX<(this.gameWidth*.9)))
+      {
+        //factor in current position on screen
+        let randNum = Math.floor(Math.random() * 2);
+        if (randNum == 0)
+        {
+          this.velocityDirection=-1;
+        }
+        else
+        {
+          this.velocityDirection=1;
+        }
+        this.timeLasteMovementChanged=Date.now();
+      }
+      else if (this.positionX<(this.gameWidth*.1)){
+        this.velocityDirection=-1;
+      }
+      else {
+        this.velocityDirection=1;
+      }
+    }
+  }
+
+  determineVelocityMagnitude()
+  {
+    this.currVelocity = (Math.random() * this.maxSpeed * this.velocityDirection);
+  }
+
+  updatePosition (deltaTime)
+  {
+    this.positionX = this.positionX + this.currVelocity*deltaTime();
   }
 
   updateHealthBar()//updates the health bar displayed on screen

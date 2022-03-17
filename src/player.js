@@ -27,7 +27,7 @@ export default class Player{
     this.meleeDamage = 10; //filler value
 
     //playerHealthBar vars
-    this.remainingHealthHearts = 1;
+    this.remainingHealthHearts = 2;
     this.playerHealthImage = new Image();
     this.playerHealthImage.src = "/images/playerhealthbar.png";
     //find length and width of playerhealthbar.png
