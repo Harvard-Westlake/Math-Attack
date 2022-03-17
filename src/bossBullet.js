@@ -18,7 +18,7 @@ export default class BossBullet{
       x:x,
       y:y,
     };
-    
+
     //console.log("X: "+Xdiff);
     //console.log("Y: "+Ydiff);
     //console.log("XVel: "+this.velX);
@@ -51,5 +51,9 @@ export default class BossBullet{
     {
       this.needsDelete = true;
     }
+  }
+  
+  flagForDeletion() {
+    this.needsDelete = true;
   }
 }
