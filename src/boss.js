@@ -30,7 +30,9 @@ export default class Boss{
     // Create Health Bar
     // To Use call healthBar.setHealthPercent(SOME_NUMBER);
     const HEALTH_BAR_WIDTH = 200;
-    this.healthBar = new HealthBar(gameWidth - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
+    let healthBarWidthPct = 15;
+    let healthBarHeightPct = 5;
+    this.healthBar = new HealthBar(gameWidth - (HEALTH_BAR_WIDTH + 5), 5, healthBarWidthPct, healthBarHeightPct);
 
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
@@ -38,13 +40,11 @@ export default class Boss{
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.healthPct);
-    console.log ('boss health bar updated');
   }
 
   takeDamage(damage) {
     this.health = this.health - damage;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
-    console.log('taking damage ' + damage + ' ' +  this.healthPct);
     this.updateHealthBar();
   }
 

@@ -8,8 +8,8 @@ import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 import Collision from '/src/collision.js'
 
-const GAME_WIDTH = window.innerWidth;
-const GAME_HEIGHT = window.innerHeight;
+let GAME_WIDTH = window.innerWidth;
+let GAME_HEIGHT = window.innerHeight;
 
 let canvas = document.getElementById("gameScreen");
 canvas.width = GAME_WIDTH;
