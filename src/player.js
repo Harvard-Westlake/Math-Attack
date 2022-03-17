@@ -5,15 +5,15 @@ export default class Player{
   constructor(gameWidth, gameHeight){
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.width = gameWidth*0.041667;
-    this.height = gameHeight*0.0833;
+    this.width = gameWidth*0.03536;
+    this.height = gameHeight*0.07072;
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.isMovementEnabled = true;
 
-    this.maxSpeedX = gameWidth*0.005;
-    this.maxSpeedY = gameHeight*0.0133;
-    this.maxDashSpeed=gameWidth*0.0091667;
+    this.maxSpeedX = gameWidth*0.0042433;
+    this.maxSpeedY = gameHeight*0.01132;
+    this.maxDashSpeed=gameWidth*0.0077793;
     this.velX = 0;
     this.velY = 0;
     this.runSlidyCoef = 0.3;
@@ -22,7 +22,7 @@ export default class Player{
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
-    this.accDown=.3;
+    this.accDown=gameHeight*0.000424328;
     this.remainingHealthHearts = 3;
     this.projectileDamage = 10; //filler value
     this.meleeDamage = 10; //filler value
