@@ -35,55 +35,24 @@ export default class Player{
 
     //animation vars
     this.playerImage = new Image();
-    this.playerImage.src = "/images/shadow_dog.png";
-    this.spriteWidth = 575; //this is the width of one frame of our animation in our spritesheet
-    this.spriteHeight = 523; //this is the width of one frame of our animation in our spritesheet
+    //this.playerImage.src = "/images/shadow_dog.png";
+    this.playerImage.src = "/images/idleAndJumpSpriteSheetCorrected.png";
+    this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
+    this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
     //this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
     this.gameFrame = 0;
     this.staggerFrames = 5; //bigger staggerFrames = slower animation
-    this.playerState = "run" //this variable controls what animation runs, match it to the names in the animationStates variable
+    this.playerState = "idle" //this variable controls what animation runs, match it to the names in the animationStates variable
     this.spriteAnimations = [];
     this.animationStates = [ //populate this with the diff animation cycles in the order they appear on the spritesheet top to bottom
       {
         name: "idle", //name of the animation state
-        frames: 7 //idle has 7 frames
+        frames: 4, //idle has 7 frames
       },
       {
         name: "jump",
         frames: 7,
-      },
-      {
-        name: "fall",
-        frames: 7,
-      },
-      {
-        name: "run",
-        frames: 9,
-      },
-      {
-        name: "dizzy",
-        frames: 11,
-      },
-      {
-        name: "sit",
-        frames: 5,
-      },
-      {
-        name: "roll",
-        frames: 7,
-      },
-      {
-        name: "bite",
-        frames: 7,
-      },
-      {
-        name: "ko",
-        frames: 12,
-      },
-      {
-        name: "getHit",
-        frames: 4,
       }
     ];
 
@@ -272,12 +241,14 @@ export default class Player{
 
     if(this.position.y+this.height>=this.gameHeight-10)
     {
+      this.playerState = "idle";
       this.position.y = this.gameHeight-10-this.height;
       this.velY=0;
       this.hasJumped= false;
       this.hasDashed = false;
     }
     else {
+      this.playerState = "jump";
       this.hasJumped=true;
     }
     if(this.position.x<0)
