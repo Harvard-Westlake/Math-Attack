@@ -5,6 +5,8 @@ export default class Boss{
 
   constructor (bossHealth, player, gameWidth, gameHeight)
   {
+    this.gameFrame = 0;
+    this.animationRate = 30;//number of frames to switch animation
     this.player=player;
     this.gameWidth=gameWidth;
     this.gameHeight=gameHeight;
@@ -69,15 +71,21 @@ export default class Boss{
 
   draw(ctx){
 
+
     let frameX = 300;
     //console.log(position);
     //console.log(this.spriteAnimations[this.playerState][positionAnimation].y);
-    let frameY = 230;
-    //console.log(frameX);
+
+    let frameY = 100;
+    let counter = this.gameFrame %(this.animationRate*2);
+    if (counter > this.animationRate){
+      frameY = 200;
+    }
+    console.log(frameY);
 
 
     //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
-    ctx.drawImage(this.bossImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
+    ctx.drawImage(this.bossImage, frameX, frameY, this.spriteWidth, this.spriteHeight, this.position.x, this.position.y, this.width, this.height);
     //draw playerhealthbar.png
     //ctx.drawImage(this.playerHealthImage)
 
@@ -91,6 +99,7 @@ export default class Boss{
    // }
 
    this.gameFrame++;
+
 
 
   }
