@@ -37,8 +37,8 @@ export default class Collision{
 
   checkForCollision(a, b)
   {
-    this.xWindow1 = a;
-    this.xWindow2 = b;
+    this.obj = a;
+    this.obj2 = b;
     this.xCollision = false;
     this.xWindow1 = this.obj.x + this.obj.width;
     this.xWindow2 = this.obj2.x + this.obj2.width;

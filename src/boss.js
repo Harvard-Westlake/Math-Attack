@@ -16,6 +16,8 @@ export default class Boss{
       x:930,
       y:540,
     };//x and y position
+    this.height = 50;
+    this.width = 50;
     this.velocity = {
       x:0,
       y:0,
