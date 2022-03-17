@@ -225,7 +225,7 @@ export default class Player{
 // ]
 
   drawHealth(ctx){
-    ctx.drawImage(this.playerHealthImage, 0,30+55*(3-this.remainingHealthHearts),225,55,5,5,225,55);
+    ctx.drawImage(this.playerHealthImage, 0,175*(4-this.remainingHealthHearts),525,175,5,5,210,70);
   }
   draw(ctx){
 
