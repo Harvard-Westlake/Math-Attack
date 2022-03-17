@@ -8,8 +8,21 @@ import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 
-const GAME_WIDTH = window.innerWidth;
-const GAME_HEIGHT = window.innerHeight;
+let GAME_WIDTH = 0;
+let GAME_HEIGHT = 0;
+
+if(window.innerHeight*2 < window.innerWidth)
+{
+  GAME_WIDTH = window.innerHeight*2;
+  GAME_HEIGHT = window.innerHeight;
+}
+else
+{
+  GAME_WIDTH = window.innerWidth;
+  GAME_HEIGHT = window.innerWidth/2;
+}
+GAME_WIDTH*=.99;
+GAME_HEIGHT*=.99;
 
 let canvas = document.getElementById("gameScreen");
 canvas.width = GAME_WIDTH;

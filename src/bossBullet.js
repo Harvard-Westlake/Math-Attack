@@ -2,8 +2,8 @@ export default class BossBullet{
 
   constructor(x, y, Xdiff, Ydiff, gameWidth,gameHeight, player){
 
-    this.width = 0.025*gameWidth;
-    this.height = 0.05*gameHeight;
+    this.width = 0.02122*gameWidth;
+    this.height = this.width;
     this.Xdiff=Xdiff;
     this.Ydiff=Ydiff;
     this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));
