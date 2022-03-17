@@ -21,6 +21,8 @@ else
   GAME_WIDTH = window.innerWidth;
   GAME_HEIGHT = window.innerWidth/2;
 }
+GAME_WIDTH*=.99;
+GAME_HEIGHT*=.99;
 
 let canvas = document.getElementById("gameScreen");
 canvas.width = GAME_WIDTH;
