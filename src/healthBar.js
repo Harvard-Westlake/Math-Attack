@@ -1,7 +1,9 @@
 export default class HealthBar{
-constructor(posX, posY, pctWidth, pctHeight){
+constructor(posX, posY, pctWidth, pctHeight, gameWidth, gameHeight){
   this.pctHeight = pctHeight;
   this.pctWidth = pctWidth;
+  this.gameWidth = gameWidth;
+  this.gameHeight = gameHeight;
 
   this.updateHeight(this.pctHeight);
   this.updateWidth(this.pctWidth);
@@ -36,16 +38,16 @@ determineWidth() {
 }
 
 updateHeight() {
-  this.height = (Math.round(window.innerHeight/100) * this.pctHeight);
+  this.height = (Math.round(this.gameHeight/100) * this.pctHeight);
 }
 updateWidth() {
-  this.width = (Math.round(window.innerWidth/100) * this.pctWidth);
+  this.width = (Math.round(this.gameWidth/100) * this.pctWidth);
 }
 
 determineLineWidth() {
-  if (window.innerHeight < 300 || window.innerWidth < 500) {
+  if (this.gameHeight < 300 || this.gameWidth < 500) {
     return 1;
-  } else if (window.innerHeight < 600 || window.innerWidth < 1200) {
+  } else if (this.gameHeight < 600 || this.gameWidth < 1200) {
     return 2;
   }
   return 3;
@@ -58,7 +60,7 @@ determineLineWidth() {
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'gray';
     let lineWidth = this.determineLineWidth();
-    let lineWidthOffset = (window.innerWidth - (this.width + (2*lineWidth) + this.position.x));
+    let lineWidthOffset = (this.gameWidth - (this.width + (2*lineWidth) + this.position.x));
     ctx.lineWidth = lineWidth;
     ctx.fillRect(this.position.x + lineWidthOffset, this.position.y, this.width, this.height);
     ctx.strokeRect(this.position.x + lineWidthOffset, this.position.y, this.width, this.height);

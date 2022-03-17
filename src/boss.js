@@ -32,7 +32,7 @@ export default class Boss{
     const HEALTH_BAR_WIDTH = 200;
     let healthBarWidthPct = 15;
     let healthBarHeightPct = 5;
-    this.healthBar = new HealthBar(2, 2, healthBarWidthPct, healthBarHeightPct);
+    this.healthBar = new HealthBar(2, 2, healthBarWidthPct, healthBarHeightPct, this.gameWidth,this.gameHeight);
 
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
