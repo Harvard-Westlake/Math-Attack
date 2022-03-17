@@ -52,4 +52,8 @@ export default class BossBullet{
       this.needsDelete = true;
     }
   }
+  
+  flagForDeletion() {
+    this.needsDelete = true;
+  }
 }

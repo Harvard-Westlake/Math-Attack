@@ -85,9 +85,8 @@ export default class Player{
 
   loseHealth()
   {
-    console.logt(playerHealth);
     this.playerHealth--;
-    console.log(playerHealth);
+    console.log(this.playerHealth);
   }
 
   updateVelocityX (){
