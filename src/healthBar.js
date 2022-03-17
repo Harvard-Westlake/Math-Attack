@@ -10,6 +10,9 @@ constructor(posX, posY,width, height){
 }
 
 setHealthPercent(latestHealthPct) {
+  if (latestHealthPct < 0) {
+    latestHealthPct = 0;
+  }
   this.healthPercent = latestHealthPct;
 }
 
