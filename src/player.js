@@ -42,7 +42,7 @@ export default class Player{
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
     //this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
     this.gameFrame = 0;
-    this.staggerFrames = 5; //bigger staggerFrames = slower animation
+    this.staggerFrames = 10; //bigger staggerFrames = slower animation
     this.playerState = "idle" //this variable controls what animation runs, match it to the names in the animationStates variable
     this.spriteAnimations = [];
     this.animationStates = [ //populate this with the diff animation cycles in the order they appear on the spritesheet top to bottom
