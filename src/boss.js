@@ -20,6 +20,13 @@ export default class Boss{
     this.maxSpeed;//maximum speed
     this.healthBar = bossHealth;
     this.bossBullets = [];
+    this.bossImage = new Image();
+    this.bossImage.src = "/images/nealis.png";
+    this.spriteWidth = 575; //this is the width of one frame of our animation in our spritesheet
+    this.spriteHeight = 523; //this is the width of one frame of our animation in our spritesheet
+    this.width = 50;
+    this.height = 50;
+
 
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
@@ -44,9 +51,9 @@ export default class Boss{
 
   }
 
-  draw(ctx){
-    ctx.fillRect(this.position.x,this.position.y,20,20);
-  }
+//  draw(ctx){
+  //  ctx.fillRect(this.position.x,this.position.y,20,20);
+//  }
 
   update(deltaTime){
     if(!deltaTime)return;
@@ -59,6 +66,35 @@ export default class Boss{
       }
     }
   }
+
+  draw(ctx){
+
+    let frameX = 300;
+    //console.log(position);
+    //console.log(this.spriteAnimations[this.playerState][positionAnimation].y);
+    let frameY = 230;
+    //console.log(frameX);
+
+
+    //ctx.drawImage(spritesheet image, source-x, source-y, source-width, source-height, destination-x. destination-y, destination-width, destination-height)
+    ctx.drawImage(this.bossImage, frameX, frameY, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
+    //draw playerhealthbar.png
+    //ctx.drawImage(this.playerHealthImage)
+
+   //  if(this.gameFrame % this.staggerFrames == 0){ //slows down our animation
+   //    if(this.frameX < 6){ //this goes through frames 0-6
+   //      this.frameX++; //increments to the next frame
+   //    }
+   //    else{
+   //      this.frameX = 0; //sets the animation back to the beginning
+   //    }
+   // }
+
+   this.gameFrame++;
+
+
+  }
+
 
 }
 //test gigalmao how the fuck did this happen
