@@ -89,8 +89,11 @@ export default class Player{
 
   loseHealth()
   {
+    if(this.remainingHealthHearts>0)
+      this.remainingHealthHearts--;
 
-    this.remainingHealthHearts--;
+    if(this.remainingHealthHearts<=0)
+      this.disableMovement();
     console.log(this.remainingHealthHearts);
   }
 
