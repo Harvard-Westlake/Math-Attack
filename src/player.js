@@ -28,7 +28,7 @@ export default class Player{
     this.meleeDamage = 10; //filler value
 
     //playerHealthBar vars
-    this.remainingHealthHearts = 1;
+    this.remainingHealthHearts = 3;
     this.playerHealthImage = new Image();
     this.playerHealthImage.src = "/images/playerhealthbar.png";
     //find length and width of playerhealthbar.png
@@ -85,7 +85,7 @@ export default class Player{
 
   loseHealth()
   {
-    
+
     this.remainingHealthHearts--;
     console.log(this.remainingHealthHearts);
   }
@@ -195,7 +195,7 @@ export default class Player{
 // ]
 
   drawHealth(ctx){
-    ctx.drawImage(this.playerHealthImage, 0,175*(4-this.remainingHealthHearts),525,175,5,5,210,70);
+    ctx.drawImage(this.playerHealthImage, 0,175*(3-this.remainingHealthHearts),525,175,5,5,210,70);
   }
   draw(ctx){
 
