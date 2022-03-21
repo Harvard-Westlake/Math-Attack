@@ -1,15 +1,27 @@
 import Player from '/src/player.js';
 import InputHandler from '/src/input.js'
 import Bullet from '/src/bullet.js'
-import HealthBar from '/src/healthBar.js'
 import Boss from '/src/boss.js'
 import BossBullet from '/src/bossBullet.js'
 import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
+import Collision from '/src/collision.js'
 
-const GAME_WIDTH = window.innerWidth;
-const GAME_HEIGHT = window.innerHeight;
+let GAME_WIDTH = 0;
+let GAME_HEIGHT = 0;
+
+if(window.innerHeight*2 < window.innerWidth)
+{
+  GAME_WIDTH = window.innerHeight*2;
+  GAME_HEIGHT = window.innerHeight;
+}
+else
+{
+  GAME_WIDTH = window.innerWidth;
+  GAME_HEIGHT = window.innerWidth/2;
+}
+
 
 let canvas = document.getElementById("gameScreen");
 canvas.width = GAME_WIDTH;
@@ -17,6 +29,7 @@ canvas.height = GAME_HEIGHT;
 let ctx = canvas.getContext('2d');
 let myImg = new Image();
 myImg.src = "./images/backgroundart.jpg";
+
 
 //disables scrolling
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
@@ -48,30 +61,40 @@ window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-// Health Bar
-// To Use call healthBar.setHealthPercent(SOME_NUMBER);
-const HEALTH_BAR_WIDTH = GAME_WIDTH*0.15;
-const healthBar = new HealthBar(GAME_WIDTH - (HEALTH_BAR_WIDTH + 5), 5, HEALTH_BAR_WIDTH, 40);
-
-ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT);
+
+//testing
+let a = new BossWeapon(69,true,9000+1);
+let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+
 
 let b = new BossAttack(player,boss);
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 b.setPosition(player.position);
-//b.movementAttack(a);
+b.movementAttack();
+
+
+console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
+boss.position= {x:player.position.x, y:player.position.y};
+console.log("boss location ",boss.position)
+player.position.x=player.position.x-10;
+console.log(player.position);
+b.setDirection();
+player.position.x=player.position.x+20;
+console.log(player.position);
+b.setDirection();
+b.meleeAttack();
 
 new InputHandler(player);
 new BossInputHandler(boss);
 
 let lastTime = 0;
-
-class AnimationFrame {
-  constructor(animate, fps = 60) {
+class Game {
+  constructor(fps = 60) {
     this.requestID = 0;
     this.fps = fps;
-    this.animate = animate;
+    this.collisionChecker = new Collision();
   }
 
   start() {
@@ -84,7 +107,7 @@ class AnimationFrame {
 
       if (delta > interval) {
         then = now - (delta % interval);
-        this.animate(delta);
+        this.gameLoop(delta);
       }
     };
     this.requestID = requestAnimationFrame(animateLoop);
@@ -94,41 +117,68 @@ class AnimationFrame {
     cancelAnimationFrame(this.requestID);
   }
 
+  gameLoop(timestamp){
+    //update gamestate
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // Update All Game Objects
+    player.update(deltaTime);
+    boss.update(deltaTime);
+    player.bullets.forEach((bullet) => {
+      bullet.update();
+    });
+    boss.bossBullets.forEach((bullet) => {
+      bullet.update();
+    });
+
+    // Check collisions
+    this.checkCollisions();
+
+    // Draw
+    ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+    ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
+
+    player.draw(ctx);
+    player.bullets.forEach((bullet) => {
+      bullet.draw(ctx);
+
+    });
+
+    boss.draw(ctx);
+    boss.bossBullets.forEach((bullet) => {
+      bullet.draw(ctx);
+    });
+  }
+
+  // Checks collisions for:
+  //    player and bossBullets
+  //    boss and playerBullets
+  checkCollisions() {
+    let self = this;
+
+    // Check Player is hit by Boss Bullets
+    let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
+    boss.bossBullets.forEach((bullet) => {
+      let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
+      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
+        bullet.flagForDeletion();
+        player.loseHealth(); // Damage Player
+      }
+    });
+
+    // Check Boss is hit by Player Bullets
+    let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
+    player.bullets.forEach((bullet) => {
+      let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
+      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, bossPositionAndSize)) {
+        bullet.flagForDeletion();
+        boss.takeDamage(bullet.damage); // Damage Boss
+      }
+    });
+  }
 }
 
-function gameLoop(timestamp){
-  //update gamestate
-  let deltaTime = timestamp - lastTime;
-  lastTime = timestamp;
-
-
-  //draw
-  ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
-  player.update(deltaTime);
-  boss.update(deltaTime);
-
-  ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
-
-  player.draw(ctx);
-  player.bullets.forEach((bullet) => {
-    bullet.update();
-    bullet.draw(ctx);
-
-  });
-
-
-  player.drawHealth(ctx);
-  
-  boss.draw(ctx);
-  boss.bossBullets.forEach((bullet) => {
-    bullet.update();
-    bullet.draw(ctx);
-  });
-
-  // Draw health bar last
-  healthBar.draw(ctx);
-}
-//gameLoop();
-
-let af = new AnimationFrame(gameLoop);
+// Create and start game
+let af = new Game();
 af.start();

@@ -1,8 +1,8 @@
 export default class Bullet{
 
-  constructor(x, y, orientation, orientations, gameWidth,gameHeight){
-    this.width = 10;
-    this.height = 10;
+  constructor(x, y, orientation, orientations, gameWidth,gameHeight, damage = 1){
+    this.width = gameWidth*0.007072;
+    this.height = this.width;
     this.speedX = 0;
     this.speedY = 0;
     this.velX = 0;
@@ -11,10 +11,11 @@ export default class Bullet{
     this.orientations = orientations;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.bulletSpeed = 10;
+    this.bulletSpeed = this.width;
     this.bulletImage = new Image();
     this.bulletImage.src = "/images/bullet.png";
     this.needsDelete = false;
+    this.damage = damage;
     this.position = {
       x:x,
       y:y,
@@ -80,5 +81,9 @@ export default class Bullet{
     {
       this.needsDelete = true;
     }
+  }
+
+  flagForDeletion() {
+    this.needsDelete = true;
   }
 }
