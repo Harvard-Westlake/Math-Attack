@@ -139,6 +139,7 @@ class Game {
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
     ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
 
+    player.drawHealth(ctx);
     player.draw(ctx);
     player.bullets.forEach((bullet) => {
       bullet.draw(ctx);
