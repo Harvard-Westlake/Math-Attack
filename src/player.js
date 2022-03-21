@@ -36,7 +36,7 @@ export default class Player{
     //animation vars
     this.playerImage = new Image();
     //this.playerImage.src = "/images/shadow_dog.png";
-    this.playerImage.src = "/images/idleAndJumpSpriteSheetCorrected.png";
+    this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
     this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
     this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
@@ -53,6 +53,10 @@ export default class Player{
       {
         name: "jump",
         frames: 7,
+      },
+      {
+        name: "run",
+        frames: 4,
       }
     ];
 
