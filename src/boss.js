@@ -33,7 +33,7 @@ export default class Boss{
       timeDied : null,
       msOfDeathAnimationLength : 3000, // Settings for displaying boss killed
       msUntilStartNextRoundAfterDeath : 5000,  // Triggers
-      msUntilBossDefeatedTextDisplayStart : 2500
+      msUntilBossDefeatedTextDisplayStart : 0  // Maybe we want 'Boss Defeated' to show after death animation
     };
 
     // Create Health Bar
@@ -95,13 +95,18 @@ export default class Boss{
     return this.death.isDead;
   }
 
-  handleDeath(gameClass) {
+  handleDeath(gameClass, drawingContext) {
     let timeNow = new Date().getTime();
     let totalTimeDead = (timeNow - this.death.timeDied);
 
     // Render boss defeated text
     if (totalTimeDead > this.death.msUntilBossDefeatedTextDisplayStart) {
       // Render
+      drawingContext.font = "80pt Calibri";
+      drawingContext.fillStyle = "gray";
+      drawingContext.fillText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
+      drawingContext.strokeStyle = "white";
+      drawingContext.strokeText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
     }
 
     // Call next boss and next level or store

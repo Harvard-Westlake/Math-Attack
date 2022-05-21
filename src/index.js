@@ -66,7 +66,7 @@ let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 //testing
 let a = new BossWeapon(69,true,9000+1);
-let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+let boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
 
 
 let b = new BossAttack(player,boss);
@@ -151,19 +151,19 @@ class Game {
       bullet.draw(ctx);
     });
 
-    this.checkRoundOver();
+    this.checkRoundOver(ctx);
   }
 
-  checkRoundOver() {
+  checkRoundOver(ctx) {
 
     // Check boss death and draw boss death states
     if (boss.isDead()) {
-      boss.handleDeath(this);
+      boss.handleDeath(this, ctx);
     }
   }
 
   nextLevel() {
-    boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+    boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
     player.resetPlayer();
   }
 
