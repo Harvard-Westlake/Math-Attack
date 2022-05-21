@@ -16,7 +16,7 @@ export default class Boss{
     this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
-      y:540,
+      y:gameHeight - 60,
     };//x and y position
     this.height = 50;
     this.width = 50;
@@ -75,7 +75,7 @@ export default class Boss{
   }
 
   draw(ctx){
-    ctx.fillRect(this.position.x,this.position.y,20,20);
+    ctx.fillRect(this.position.x,this.position.y,this.height,this.width);
     this.healthBar.draw(ctx);
   }
 

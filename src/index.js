@@ -74,7 +74,8 @@ console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage 
 b.setPosition(player.position);
 b.movementAttack();
 
-
+// This was removed because it sets the default BOSS to a DIFFERENT position than the constructor above
+/*
 console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 boss.position= {x:player.position.x, y:player.position.y};
 console.log("boss location ",boss.position)
@@ -83,6 +84,7 @@ console.log(player.position);
 b.setDirection();
 player.position.x=player.position.x+20;
 console.log(player.position);
+*/
 b.setDirection();
 b.meleeAttack();
 
