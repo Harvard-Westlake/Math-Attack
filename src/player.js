@@ -31,6 +31,13 @@ export default class Player{
     this.remainingHealthHearts = 3;
     this.playerHealthImage = new Image();
     this.playerHealthImage.src = "/images/playerhealthbar.png";
+
+    // When the player dies, we need a few variables for death animation
+    this.death = {
+      isDead : false,
+      timeDied : null,
+      msUntilBossDefeatedTextDisplayStart : 2500
+    };
     //find length and width of playerhealthbar.png
 
     //animation vars
@@ -72,7 +79,6 @@ export default class Player{
 
       }
 
-
       this.spriteAnimations[state.name] = frames.loc; //create a new value in sprite animations with the name of its state and the value of its number of frames
     }); //this will population spriteAnimations with each state of animation and corresponding array of each position on the spritesheet for every frame of that state's animation
 
@@ -85,6 +91,15 @@ export default class Player{
     }
     this.bullets = [];
 
+  }
+
+  resetPlayer() {
+    this.remainingHealthHearts = 3;
+    this.isMovingLeft = false;
+    this.isMovingRight = false;
+    this.isMovementEnabled = true;
+    this.velX = 0;
+    this.velY = 0;
   }
 
   loseHealth()
@@ -282,6 +297,10 @@ export default class Player{
 
     //to see the list of bullets
     //console.log(this.bullets);
+  }
+
+  isDead() {
+    return this.death.isDead;
   }
 
 }
