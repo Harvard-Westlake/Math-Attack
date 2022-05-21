@@ -27,6 +27,15 @@ export default class Boss{
     this.maxSpeed;//maximum speed
     this.bossBullets = [];
 
+    // When the boss dies, we need a few variables for death animation
+    this.death = {
+      isDead : false,
+      timeDied : null,
+      msOfDeathAnimationLength : 3000, // Settings for displaying boss killed
+      msUntilStartNextRoundAfterDeath : 5000,  // Triggers
+      msUntilBossDefeatedTextDisplayStart : 2500
+    };
+
     // Create Health Bar
     // To Use call healthBar.setHealthPercent(SOME_NUMBER);
     const HEALTH_BAR_WIDTH = 200;
@@ -46,6 +55,14 @@ export default class Boss{
     this.health = this.health - damage;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
     this.updateHealthBar();
+
+    // If the boss dies we
+    // 1:Flag As Dead,
+    //  Do things depending on flag like..  Show Death Animation, Move To Next Boss
+    if (this.health <= 0) {
+      this.death.isDead = true;
+      this.death.timeDied = new Date().getTime();
+    }
   }
 
   projectileAttack(){
@@ -71,6 +88,25 @@ export default class Boss{
         this.bossBullets.splice(i,1);
         i--;
       }
+    }
+  }
+
+  isDead() {
+    return this.death.isDead;
+  }
+
+  handleDeath(gameClass) {
+    let timeNow = new Date().getTime();
+    let totalTimeDead = (timeNow - this.death.timeDied);
+
+    // Render boss defeated text
+    if (totalTimeDead > this.death.msUntilBossDefeatedTextDisplayStart) {
+      // Render
+    }
+
+    // Call next boss and next level or store
+    if (totalTimeDead > this.death.msUntilStartNextRoundAfterDeath) {
+      gameClass.nextLevel();
     }
   }
 

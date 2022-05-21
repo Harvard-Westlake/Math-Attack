@@ -150,12 +150,33 @@ class Game {
     boss.bossBullets.forEach((bullet) => {
       bullet.draw(ctx);
     });
+
+    this.checkRoundOver();
+  }
+
+  checkRoundOver() {
+
+    // Check boss death and draw boss death states
+    if (boss.isDead()) {
+      boss.handleDeath(this);
+    }
+  }
+
+  nextLevel() {
+    boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+    player.resetPlayer();
   }
 
   // Checks collisions for:
   //    player and bossBullets
   //    boss and playerBullets
   checkCollisions() {
+
+    // Skip collision if the round is over
+    if (player.isDead() || boss.isDead()) {
+      return;
+    }
+
     let self = this;
 
     // Check Player is hit by Boss Bullets
