@@ -67,7 +67,7 @@ let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 //testing
 let a = new BossWeapon(69,true,9000+1);
-let boss = new Boss(100,player,GAME_WIDTH, GAME_HEIGHT,a);
+let boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
 
 
 let b = new BossAttack(player,boss);
@@ -75,7 +75,8 @@ console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage 
 b.setPosition(player.position);
 b.movementAttack();
 
-
+// This was removed because it sets the default BOSS to a DIFFERENT position than the constructor above
+/*
 console.log("i am range "+a.getRange()+" with melee "+a.getMelee()+" and damage "+a.getDamage()+".");
 boss.position= {x:player.position.x, y:player.position.y};
 console.log("boss location ",boss.position)
@@ -84,6 +85,7 @@ console.log(player.position);
 b.setDirection();
 player.position.x=player.position.x+20;
 console.log(player.position);
+*/
 b.setDirection();
 b.meleeAttack();
 
@@ -151,12 +153,33 @@ class Game {
     boss.bossBullets.forEach((bullet) => {
       bullet.draw(ctx);
     });
+
+    this.checkRoundOver(ctx);
+  }
+
+  checkRoundOver(ctx) {
+
+    // Check boss death and draw boss death states
+    if (boss.isDead()) {
+      boss.handleDeath(this, ctx);
+    }
+  }
+
+  nextLevel() {
+    boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
+    player.resetPlayer();
   }
 
   // Checks collisions for:
   //    player and bossBullets
   //    boss and playerBullets
   checkCollisions() {
+
+    // Skip collision if the round is over
+    if (player.isDead() || boss.isDead()) {
+      return;
+    }
+
     let self = this;
 
     // Check Player is hit by Boss Bullets

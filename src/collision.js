@@ -50,15 +50,12 @@ export default class Collision{
     {
       this.xCollision = true;
     }
-
+    
     this.yCollision = false;
     this.yWindow1 = this.obj.y + this.obj.height;
     this.yWindow2 = this.obj2.y + this.obj2.height;
-    if (this.obj2.y >= this.obj.y && this.obj2.y <= this.yWindow1)
-    {
-      this.yCollision = true;
-    }
-    if (this.yWindow2 >= this.obj.y && this.yWindow2 <= this.yWindow1)
+    if ((this.obj.y <= this.yWindow2 && this.obj.y >= this.obj2.y)  ||      // Is top of object 1 within object 2
+        (this.yWindow1 <= this.yWindow2  && this.yWindow1 >= this.obj2.y))   // or Is bottom of object 1 within object 2
     {
       this.yCollision = true;
     }
