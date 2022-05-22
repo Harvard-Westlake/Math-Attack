@@ -7,6 +7,7 @@ import BossInputHandler from '/src/bossinputTEST.js'
 import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 import Collision from '/src/collision.js'
+import HealthBar from '/src/healthBar.js'
 
 let GAME_WIDTH = 0;
 let GAME_HEIGHT = 0;
@@ -166,6 +167,7 @@ class Game {
         bullet.flagForDeletion();
         player.loseHealth(); // Damage Player
       }
+    //create health bar instance and if health bar percent is zero then lose health
     });
 
     // Check Boss is hit by Player Bullets
