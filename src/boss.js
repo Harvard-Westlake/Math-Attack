@@ -46,6 +46,23 @@ export default class Boss{
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
 
+  resetBoss(){
+    this.health = this.healthMax; // Health is a certain amount of HP
+    this.healthPct = 100; // Integer out of 100
+    this.updateHealthBar(); 
+    this.weapon = weapon; //health as an integer percentage out of 100
+    this.position = {
+      x:930,
+      y:gameHeight - 60,
+    };//x and y position
+    this.velocity = {
+      x:0,
+      y:0,
+    }
+    this.maxSpeed;//maximum speed
+    this.bossBullets = [];
+  }
+
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.healthPct);

@@ -163,7 +163,16 @@ class Game {
     if (boss.isDead()) {
       boss.handleDeath(this, ctx);
     }
+
+    if (player.remainingHealthHearts == 0){
+      player.resetPlayer();
+      player.position.x=665;
+      player.position.y=665; 
+      boss.resetBoss();
+    }
   }
+
+
 
   nextLevel() {
     boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
