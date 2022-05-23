@@ -49,8 +49,8 @@ export default class Boss{
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.healthPct);
-
   }
+
 
   takeDamage(damage)
   {

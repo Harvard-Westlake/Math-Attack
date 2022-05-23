@@ -1,5 +1,6 @@
 export default class InputHandler{
 
+
   // Sets left or right view direction.  All other directions
   // are set in 'updateOrientation'
   updateUnderlyingOrientation(leftOrRight) {
@@ -77,6 +78,7 @@ export default class InputHandler{
 
 
   constructor(player){
+    this.fireBulletSwitch = 0;
     this.player = player;
     // Kinda gross but
     this.orientations = {
