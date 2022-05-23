@@ -104,7 +104,6 @@ export default class Boss{
   handleDeath(gameClass, drawingContext) {
     let timeNow = new Date().getTime();
     let totalTimeDead = (timeNow - this.death.timeDied);
-
     // Render boss defeated text
     if (totalTimeDead > this.death.msUntilBossDefeatedTextDisplayStart) {
       // Render
