@@ -52,7 +52,8 @@ export default class Boss{
 
   }
 
-  takeDamage(damage) {
+  takeDamage(damage)
+  {
     this.health = this.health - damage/10;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
     this.updateHealthBar();
