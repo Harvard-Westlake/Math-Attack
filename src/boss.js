@@ -36,11 +36,6 @@ export default class Boss{
       msUntilBossDefeatedTextDisplayStart : 0  // Maybe we want 'Boss Defeated' to show after death animation
     };
 
-    this.BossImage = new Image();
-    this.BossImage.src = "/images/theissmad.png";
-    this.spriteWidth = 630; //this is the width of one frame of our animation in our spritesheet
-    this.spriteHeight = 951;
-
     // Create Health Bar
     // To Use call healthBar.setHealthPercent(SOME_NUMBER);
     const HEALTH_BAR_WIDTH = 200;
@@ -80,9 +75,8 @@ export default class Boss{
   }
 
   draw(ctx){
+    ctx.fillRect(this.position.x,this.position.y,this.height,this.width);
     this.healthBar.draw(ctx);
-    ctx.drawImage(this.BossImage, 0, 0, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
-
   }
 
   update(deltaTime){
@@ -104,6 +98,7 @@ export default class Boss{
   handleDeath(gameClass, drawingContext) {
     let timeNow = new Date().getTime();
     let totalTimeDead = (timeNow - this.death.timeDied);
+
     // Render boss defeated text
     if (totalTimeDead > this.death.msUntilBossDefeatedTextDisplayStart) {
       // Render
