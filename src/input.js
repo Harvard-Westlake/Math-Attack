@@ -1,5 +1,6 @@
 export default class InputHandler{
 
+
   // Sets left or right view direction.  All other directions
   // are set in 'updateOrientation'
   updateUnderlyingOrientation(leftOrRight) {
@@ -77,6 +78,7 @@ export default class InputHandler{
 
 
   constructor(player){
+    this.fireBulletSwitch = 0;
     this.player = player;
     // Kinda gross but
     this.orientations = {
@@ -137,7 +139,10 @@ export default class InputHandler{
             this.updateOrientation();
             break;
           case this.keys.fire:
-            this.player.fireBullet(this.orientation, this.orientations);
+            if (this.fireBulletSwitch == 0){
+              this.player.fireBullet(this.orientation, this.orientations);
+            }
+            this.fireBulletSwitch = 1; //can fire
             break;
           // Uses only jmp and shift
           case this.keys.jump:
@@ -163,6 +168,9 @@ export default class InputHandler{
         case this.keys.down:
           this.keyDown[event.keyCode] = false;
           this.updateOrientation();
+          break;
+        case this.keys.fire:
+          this.fireBulletSwitch = 0;
           break;
 
         case this.keys.left:
