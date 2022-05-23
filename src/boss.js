@@ -54,11 +54,10 @@ export default class Boss{
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.healthPct);
-
   }
 
   takeDamage(damage) {
-    this.health = this.health - damage/10;
+    this.health = this.health - damage;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
     this.updateHealthBar();
 
