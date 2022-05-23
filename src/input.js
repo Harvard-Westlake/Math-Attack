@@ -139,10 +139,7 @@ export default class InputHandler{
             this.updateOrientation();
             break;
           case this.keys.fire:
-            if (this.fireBulletSwitch == 0){
-              this.player.fireBullet(this.orientation, this.orientations);
-            }
-            this.fireBulletSwitch = 1; //can fire
+            this.player.fireBullet(this.orientation, this.orientations);
             break;
           // Uses only jmp and shift
           case this.keys.jump:
@@ -168,9 +165,6 @@ export default class InputHandler{
         case this.keys.down:
           this.keyDown[event.keyCode] = false;
           this.updateOrientation();
-          break;
-        case this.keys.fire:
-          this.fireBulletSwitch = 0;
           break;
 
         case this.keys.left:
