@@ -20,7 +20,7 @@ export default class Boss{
     };//x and y position
     this.height = 50;
     this.width = 50;
-    this.velocity = {
+    this.velocity = { 
       x:0,
       y:0,
     }
