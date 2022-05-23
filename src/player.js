@@ -185,8 +185,34 @@ export default class Player{
         break;
     }
   }
-  fireBullet(orientation, orientations){
-    this.bullets.push(new Bullet(this.position.x,this.position.y, orientation,orientations, this.gameWidth, this.gameHeight));
+  fireBullet(orientation, orientations){ //this switch has the purpose of changing the exit point of the bullet so that it matches up with the orientation of the shooting
+    switch(orientation){
+      case orientations.left:
+        this.bullets.push(new Bullet(this.position.x +6,(this.position.y + this.spriteHeight/2), orientation, orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.right:
+        this.bullets.push(new Bullet(this.position.x + this.spriteWidth/2 ,this.position.y + this.spriteHeight/2, orientation,orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.down:
+        this.bullets.push(new Bullet(this.position.x + this.spriteWidth/2,this.position.y + this.spriteHeight/2, orientation,orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.up:
+        this.bullets.push(new Bullet(this.position.x + this.spriteWidth/2,this.position.y + this.spriteHeight/4, orientation,orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.upLeft:
+      this.bullets.push(new Bullet(this.position.x +6,(this.position.y + this.spriteHeight/2), orientation, orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.upRight:
+        this.bullets.push(new Bullet(this.position.x + this.spriteWidth/2 ,this.position.y + this.spriteHeight/2, orientation,orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.downLeft:
+        this.bullets.push(new Bullet(this.position.x +6,(this.position.y + this.spriteHeight/2), orientation, orientations, this.gameWidth, this.gameHeight));
+        break;
+      case orientations.downRight:
+        this.bullets.push(new Bullet(this.position.x + this.spriteWidth/2 ,this.position.y + this.spriteHeight/2, orientation,orientations, this.gameWidth, this.gameHeight));
+        break;
+    }
+    //this.bullets.push(new Bullet(this.position.x,this.position.y, orientation,orientations, this.gameWidth, this.gameHeight));
   }
   decreaseVulnerabilityTime(){
     if (this.vulnerableTimeLeft > 0){
