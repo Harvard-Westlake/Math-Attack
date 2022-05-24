@@ -172,9 +172,6 @@ export default class InputHandler{
 
         case this.keys.left:
         case this.keys.right:
-        case this.keys.fire:
-          this.fireBulletSwitch = 0;
-          break;
           this.keyDown[event.keyCode] = false;
           if (event.keyCode == this.keys.right && this.keyDown[this.keys.left]==true){
             this.updateUnderlyingOrientation (this.keys.left);
@@ -187,7 +184,9 @@ export default class InputHandler{
           }
           this.updateOrientation();
           break;
-
+        case this.keys.fire:
+          this.fireBulletSwitch = 0;
+          break;
         default:
           break;
       }
