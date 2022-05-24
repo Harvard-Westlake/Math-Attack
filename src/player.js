@@ -18,7 +18,8 @@ export default class Player{
     this.velY = 0;
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.4;
-    this.maxVulnerabilityTime = 15;
+    this.dashVulnerabilityTime = 15;
+    this.hitVulnerabilityTime = 60;
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
@@ -106,7 +107,7 @@ export default class Player{
   {
     if(this.remainingHealthHearts>0)
       this.remainingHealthHearts--;
-
+    this.vulnerableTimeLeft = this.hitVulnerabilityTime;
     if(this.remainingHealthHearts<=0)
       this.disableMovement();
     console.log(this.remainingHealthHearts);
@@ -150,7 +151,7 @@ export default class Player{
     this.velY = this.maxSpeedY;
   }
   dash(orientation, orientations){
-    this.vulnerableTimeLeft = this.maxVulnerabilityTime;
+    this.vulnerableTimeLeft = this.dashVulnerabilityTime;
     if(this.hasDashed)
       return;
     this.hasDashed = true;
