@@ -64,11 +64,12 @@ window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
-player.disableMovement();
+console.log (player.checkIfMovementEnabled());
 
 //testing
 let a = new BossWeapon(69,true,9000+1);
 let boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
+
 
 
 let b = new BossAttack(player,boss);
@@ -90,8 +91,8 @@ console.log(player.position);
 b.setDirection();
 b.meleeAttack();
 
-new InputHandler(player);
-new BossInputHandler(boss);
+let iH = new InputHandler(player);
+let bI = new BossInputHandler(boss);
 
 let lastTime = 0;
 class Game {
@@ -221,6 +222,7 @@ document.getElementById("startButton").addEventListener("click", {
   document.getElementById("startButton").hidden = true;
   alert ("button clicked");
 });*/
+
 
 
 

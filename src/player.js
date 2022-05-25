@@ -9,7 +9,7 @@ export default class Player{
     this.height = gameHeight*0.07072;
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.isMovementEnabled = true;
+    this.isMovementEnabled = false;
 
     this.maxSpeedX = gameWidth*0.0042433;
     this.maxSpeedY = gameHeight*0.01132;
@@ -100,7 +100,7 @@ export default class Player{
     this.remainingHealthHearts = 3;
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.isMovementEnabled = true;
+    this.isMovementEnabled = false;
     this.velX = 0;
     this.velY = 0;
 
