@@ -42,7 +42,15 @@ export default class Player {
     //animation vars
     this.playerImage = new Image();
     //this.playerImage.src = "/images/shadow_dog.png";
-    this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
+    if (this.isMovementEnabled == true && this.isMovingRight == true)
+    {
+      this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
+    }
+    else
+    {
+      this.playerImage.src = "/images/runIdleJumpSpriteSheet4LEFT_.png";
+      //PUT A NEW IMAGE HERE OF THE PERSON IN THE LEFT STATE
+    }
     this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
     this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
@@ -128,10 +136,12 @@ export default class Player {
   moveLeft() {
     this.isMovingRight = false;
     this.isMovingLeft = true;
+    this.playerImage.src = "/images/runIdleJumpSpriteSheet4LEFT_.png";
   }
   moveRight() {
     this.isMovingLeft = false;
     this.isMovingRight = true;
+    this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
   }
   stopHorizontal() {
     this.isMovingLeft = false;
