@@ -163,7 +163,17 @@ class Game {
     if (boss.isDead()) {
       boss.handleDeath(this, ctx);
     }
+
+    if (player.remainingHealthHearts == 0){
+      alert("you are dead!! oh no :(. Press the restart button to start a new game");
+      player.resetPlayer();
+      player.position.x=665;
+      player.position.y=665;
+      boss.resetBoss();
+    }
   }
+
+
 
   nextLevel() {
     boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
@@ -186,7 +196,7 @@ class Game {
     let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
     boss.bossBullets.forEach((bullet) => {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
-      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
+      if (player.vulnerableTimeLeft<=0&&self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
         bullet.flagForDeletion();
         player.loseHealth(); // Damage Player
       }

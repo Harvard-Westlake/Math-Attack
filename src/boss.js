@@ -51,13 +51,32 @@ export default class Boss{
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
   }
 
+  resetBoss(){
+    this.health = this.healthMax; // Health is a certain amount of HP
+    this.healthPct = 100; // Integer out of 100
+    this.updateHealthBar(); 
+    this.weapon = weapon; //health as an integer percentage out of 100
+    this.position = {
+      x:930,
+      y:gameHeight - 60,
+    };//x and y position
+    this.velocity = {
+      x:0,
+      y:0,
+    }
+    this.maxSpeed;//maximum speed
+    this.bossBullets = [];
+  }
+
   updateHealthBar()//updates the health bar displayed on screen
   {
     this.healthBar.setHealthPercent(this.healthPct);
   }
 
-  takeDamage(damage) {
-    this.health = this.health - damage;
+
+  takeDamage(damage)
+  {
+    this.health = this.health - damage/10;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
     this.updateHealthBar();
 
@@ -72,11 +91,12 @@ export default class Boss{
 
   projectileAttack(){
     //console.log('boss attack');
+    if(this.healthPct >0) {
     this.Xdiff=this.position.x-this.player.position.x;
     this.Ydiff=this.position.y-this.player.position.y;
 
     this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
-
+}
   }
 
   draw(ctx){
