@@ -94,7 +94,7 @@ export default class Player{
 
   }
 
-  
+
 
   resetPlayer() {
     this.remainingHealthHearts = 3;
@@ -228,6 +228,11 @@ export default class Player{
   disableMovement()
   {
     this.isMovementEnabled = false;
+  }
+
+  enableMovement()
+  {
+    this.isMovementEnabled = true;
   }
 
   checkIfMovementEnabled()
