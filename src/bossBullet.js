@@ -7,11 +7,13 @@ export default class BossBullet{
     this.Xdiff=Xdiff;
     this.Ydiff=Ydiff;
     this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));
-    this.velY = 23*Math.sin(Math.atan2(Ydiff,Xdiff));
+    this.velY =  23*Math.sin(Math.atan2(Ydiff,Xdiff));
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.bulletImage = new Image();
+    this.bulletImage = new Image(172,55);
     this.bulletImage.src = "/images/bullet.png";
+    this.spriteWidth = 500; //this is the width of one frame of our animation in our spritesheet
+    this.spriteHeight = 500;
     this.needsDelete = false;
     this.player=player;
     this.position = {
@@ -27,7 +29,7 @@ export default class BossBullet{
   }
 
   draw(ctx){
-    ctx.drawImage(this.bulletImage, 0, 0, 8, 8,this.position.x, this.position.y, this.width, this.height);
+    ctx.drawImage(this.bulletImage, 0, 0, this.spriteWidth, this.spriteHeight, this.position.x, this.position.y, this.width, this.height);
   }
 
   update(){
@@ -52,7 +54,7 @@ export default class BossBullet{
       this.needsDelete = true;
     }
   }
-  
+
   flagForDeletion() {
     this.needsDelete = true;
   }
