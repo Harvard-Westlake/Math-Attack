@@ -200,11 +200,17 @@ class Game {
         bullet.flagForDeletion();
         player.loseHealth(); // Damage Player
       }
+
     //create health bar instance and if health bar percent is zero then lose health
     });
-
-    // Check Boss is hit by Player Bullets
     let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
+    //boss-player check collision
+    // Check Boss is hit by Player Bullets
+    if(self.collisionChecker.checkForCollision(playerPositionAndSize, bossPositionAndSize)){
+      player.loseHealth();
+      player.vulnerableTimeLeft = player.hitVulnerabilityTime;
+    }
+
     player.bullets.forEach((bullet) => {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
       if (self.collisionChecker.checkForCollision(bulletPositionAndSize, bossPositionAndSize)) {
