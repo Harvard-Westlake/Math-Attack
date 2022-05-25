@@ -21,7 +21,8 @@ export default class Player {
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
-    this.accDown = gameHeight * 0.000424328;
+    this.isDashing = false;
+    this.accDown=gameHeight*0.000424328;
     this.remainingHealthHearts = 3;
     this.projectileDamage = 10; //filler value
     this.meleeDamage = 10; //filler value
@@ -99,6 +100,8 @@ export default class Player {
     this.bullets = [];
   }
 
+
+
   resetPlayer() {
     this.remainingHealthHearts = 3;
     this.isMovingLeft = false;
@@ -162,7 +165,11 @@ export default class Player {
     this.vulnerableTimeLeft = this.dashVulnerabilityTime;
     if (this.hasDashed) return;
     this.hasDashed = true;
-    switch (orientation) {
+    this.isDashing = true;
+    setTimeout(() => {
+      this.isDashing = false;
+    }, 1000);
+    switch(orientation){
       case orientations.left:
         this.velX = -1 * this.maxDashSpeed;
         break;
