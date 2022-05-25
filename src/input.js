@@ -122,6 +122,10 @@ export default class InputHandler {
             break;
 
           case this.keys.up:
+          if (this.keyDown[this.keys.jump] != true) {
+            this.player.isJumping = true;
+            this.player.jump();
+          }
           case this.keys.down:
             this.keyDown[event.keyCode] = true;
             this.updateOrientation();
