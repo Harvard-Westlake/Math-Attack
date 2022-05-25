@@ -94,6 +94,8 @@ export default class Player{
 
   }
 
+  
+
   resetPlayer() {
     this.remainingHealthHearts = 3;
     this.isMovingLeft = false;
@@ -101,7 +103,9 @@ export default class Player{
     this.isMovementEnabled = true;
     this.velX = 0;
     this.velY = 0;
+
   }
+
 
   loseHealth()
   {
@@ -303,5 +307,6 @@ export default class Player{
   isDead() {
     return this.death.isDead;
   }
+
 
 }
