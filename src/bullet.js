@@ -17,8 +17,8 @@ export default class Bullet{
     this.needsDelete = false;
     this.damage = damage;
     this.position = {
-      x:x,
-      y:y,
+      x:x+9,
+      y:y+13,
     };
   }
   setVelocity(){
