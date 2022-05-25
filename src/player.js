@@ -42,6 +42,7 @@ export default class Player {
     //animation vars
     this.playerImage = new Image();
     //this.playerImage.src = "/images/shadow_dog.png";
+    //The below code helps prepare the figure for direction
     if (this.isMovementEnabled == true && this.isMovingRight == true)
     {
       this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
