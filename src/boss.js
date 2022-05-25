@@ -91,11 +91,12 @@ export default class Boss{
 
   projectileAttack(){
     //console.log('boss attack');
+    if(this.healthPct >0) {
     this.Xdiff=this.position.x-this.player.position.x;
     this.Ydiff=this.position.y-this.player.position.y;
 
     this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
-
+}
   }
 
   draw(ctx){
