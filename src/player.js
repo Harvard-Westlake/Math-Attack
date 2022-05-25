@@ -49,7 +49,7 @@ export default class Player {
     }
     else
     {
-      this.playerImage.src = "/images/runIdleJumpSpriteSheet4LEFT_.png";
+      this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
       //PUT A NEW IMAGE HERE OF THE PERSON IN THE LEFT STATE
     }
     this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
