@@ -98,6 +98,8 @@ class Game {
     this.requestID = 0;
     this.fps = fps;
     this.collisionChecker = new Collision();
+    this.bossPlayerCollisionTimeout = false;
+
   }
 
   start() {
@@ -223,9 +225,13 @@ class Game {
           boss.takeDamage(1);//Damage Boss
         }
         //if the player is not dashing but simply collides with boss
-      else {
+      else if (this.bossPlayerCollisionTimeout == false)//ensures that there is a .5 second cooldown for boss player collisions
+      {
         player.loseHealth();//Lose player health
-        player.vulnerableTimeLeft = player.hitVulnerabilityTime;
+        this.bossPlayerCollisionTimeout = true;
+        setTimeout(() => {
+          this.bossPlayerCollisionTimeout = false;
+        }, 500);
         }
       }
   }
