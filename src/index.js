@@ -212,6 +212,17 @@ class Game {
         boss.takeDamage(bullet.damage); // Damage Boss
       }
     });
+
+    //Check is Boss hit by player
+    bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
+      if (self.collisionChecker.checkForCollision(playerPositionAndSize, bossPositionAndSize)) {
+        //console.log("COLLISION!!!");
+        //if in the middle of dashing
+        if (player.isDashing)
+        {
+          boss.takeDamage(1);//Damage Boss
+        }
+      }
   }
 }
 

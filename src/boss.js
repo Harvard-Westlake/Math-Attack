@@ -20,7 +20,7 @@ export default class Boss{
     };//x and y position
     this.height = 50;
     this.width = 50;
-    this.velocity = { 
+    this.velocity = {
       x:0,
       y:0,
     }
@@ -54,7 +54,7 @@ export default class Boss{
   resetBoss(){
     this.health = this.healthMax; // Health is a certain amount of HP
     this.healthPct = 100; // Integer out of 100
-    this.updateHealthBar(); 
+    this.updateHealthBar();
     this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
@@ -91,12 +91,12 @@ export default class Boss{
 
   projectileAttack(){
     //console.log('boss attack');
-    if(this.healthPct >0) {
-    this.Xdiff=this.position.x-this.player.position.x;
-    this.Ydiff=this.position.y-this.player.position.y;
+    if (this.death.isDead != true) {
+      this.Xdiff=this.position.x-this.player.position.x;
+      this.Ydiff=this.position.y-this.player.position.y;
 
-    this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
-}
+      this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
+    }
   }
 
   draw(ctx){
