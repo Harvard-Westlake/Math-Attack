@@ -16,16 +16,30 @@ export default class Boss{
     this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
-      y:540,
+      y:gameHeight - 60,
     };//x and y position
     this.height = 50;
     this.width = 50;
-    this.velocity = {
+    this.velocity = { 
       x:0,
       y:0,
     }
     this.maxSpeed;//maximum speed
     this.bossBullets = [];
+
+    // When the boss dies, we need a few variables for death animation
+    this.death = {
+      isDead : false,
+      timeDied : null,
+      msOfDeathAnimationLength : 3000, // Settings for displaying boss killed
+      msUntilStartNextRoundAfterDeath : 5000,  // Triggers
+      msUntilBossDefeatedTextDisplayStart : 0  // Maybe we want 'Boss Defeated' to show after death animation
+    };
+
+    this.BossImage = new Image();
+    this.BossImage.src = "/images/theissmad.png";
+    this.spriteWidth = 630; //this is the width of one frame of our animation in our spritesheet
+    this.spriteHeight = 951;
 
     // Create Health Bar
     // To Use call healthBar.setHealthPercent(SOME_NUMBER);
@@ -46,6 +60,14 @@ export default class Boss{
     this.health = this.health - damage;
     this.healthPct = Math.round((this.health / this.healthMax) * 100);
     this.updateHealthBar();
+
+    // If the boss dies we
+    // 1:Flag As Dead,
+    //  Do things depending on flag like..  Show Death Animation, Move To Next Boss
+    if (this.health <= 0) {
+      this.death.isDead = true;
+      this.death.timeDied = new Date().getTime();
+    }
   }
 
   projectileAttack(){
@@ -59,8 +81,9 @@ export default class Boss{
   }
 
   draw(ctx){
-    ctx.fillRect(this.position.x,this.position.y,20,20);
     this.healthBar.draw(ctx);
+    ctx.drawImage(this.BossImage, 0, 0, this.spriteWidth, this.spriteHeight,this.position.x, this.position.y, this.width,this.height);
+
   }
 
   update(deltaTime){
@@ -72,6 +95,29 @@ export default class Boss{
         this.bossBullets.splice(i,1);
         i--;
       }
+    }
+  }
+
+  isDead() {
+    return this.death.isDead;
+  }
+
+  handleDeath(gameClass, drawingContext) {
+    let timeNow = new Date().getTime();
+    let totalTimeDead = (timeNow - this.death.timeDied);
+    // Render boss defeated text
+    if (totalTimeDead > this.death.msUntilBossDefeatedTextDisplayStart) {
+      // Render
+      drawingContext.font = "80pt Calibri";
+      drawingContext.fillStyle = "gray";
+      drawingContext.fillText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
+      drawingContext.strokeStyle = "white";
+      drawingContext.strokeText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
+    }
+
+    // Call next boss and next level or store
+    if (totalTimeDead > this.death.msUntilStartNextRoundAfterDeath) {
+      gameClass.nextLevel();
     }
   }
 
