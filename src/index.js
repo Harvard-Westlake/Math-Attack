@@ -202,7 +202,19 @@ class Game {
       }
     //create health bar instance and if health bar percent is zero then lose health
     });
+    //delete bullets that hit each other
+    player.bullets.forEach((bullet) => {
+      let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
 
+      boss.bossBullets.forEach((bbullet) => {
+        let bbulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bbullet);
+
+        if(self.collisionChecker.checkForCollision(bulletPositionAndSize,bbulletPositionAndSize)){
+          bullet.flagForDeletion();
+          bbullet.flagForDeletion();
+        }
+      });
+    });
     // Check Boss is hit by Player Bullets
     let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
     player.bullets.forEach((bullet) => {
