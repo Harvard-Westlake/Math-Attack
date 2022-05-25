@@ -6,8 +6,10 @@ export default class BossBullet{
     this.height = this.width;
     this.Xdiff=Xdiff;
     this.Ydiff=Ydiff;
+ BossBulletImage
     this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));
     this.velY =  23*Math.sin(Math.atan2(Ydiff,Xdiff));
+ main
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.bulletImage = new Image(172,55);

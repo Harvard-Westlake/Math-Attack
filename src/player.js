@@ -21,7 +21,8 @@ export default class Player {
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;
-    this.accDown = gameHeight * 0.000424328;
+    this.isDashing = false;
+    this.accDown=gameHeight*0.000424328;
     this.remainingHealthHearts = 3;
     this.projectileDamage = 10; //filler value
     this.meleeDamage = 10; //filler value
@@ -42,7 +43,16 @@ export default class Player {
     //animation vars
     this.playerImage = new Image();
     //this.playerImage.src = "/images/shadow_dog.png";
-    this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
+    //The below code helps prepare the figure for direction; it may not be necessary, but for now it is seemingly needed
+    if (this.isMovementEnabled == true && this.isMovingRight == true)
+    {
+      this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
+    }
+    else
+    {
+      this.playerImage.src = "/images/runIdleJumpSpriteSheet4LEFT_.png";
+      //PUT A NEW IMAGE HERE OF THE PERSON IN THE LEFT STATE
+    }
     this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
     this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
@@ -90,6 +100,8 @@ export default class Player {
     this.bullets = [];
   }
 
+
+
   resetPlayer() {
     this.remainingHealthHearts = 3;
     this.isMovingLeft = false;
@@ -128,10 +140,12 @@ export default class Player {
   moveLeft() {
     this.isMovingRight = false;
     this.isMovingLeft = true;
+    this.playerImage.src = "/images/runIdleJumpSpriteSheet4LEFT_.png";
   }
   moveRight() {
     this.isMovingLeft = false;
     this.isMovingRight = true;
+    this.playerImage.src = "/images/runIdleJumpSpriteSheet4_.png";
   }
   stopHorizontal() {
     this.isMovingLeft = false;
@@ -151,7 +165,11 @@ export default class Player {
     this.vulnerableTimeLeft = this.dashVulnerabilityTime;
     if (this.hasDashed) return;
     this.hasDashed = true;
-    switch (orientation) {
+    this.isDashing = true;
+    setTimeout(() => {
+      this.isDashing = false;
+    }, 1000);
+    switch(orientation){
       case orientations.left:
         this.velX = -1 * this.maxDashSpeed;
         break;
