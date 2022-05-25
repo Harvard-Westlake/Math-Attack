@@ -50,7 +50,7 @@ export default class Collision{
     {
       this.xCollision = true;
     }
-    
+
     this.yCollision = false;
     this.yWindow1 = this.obj.y + this.obj.height;
     this.yWindow2 = this.obj2.y + this.obj2.height;

@@ -128,6 +128,7 @@ class Game {
     // Update All Game Objects
     player.update(deltaTime);
     boss.update(deltaTime);
+    this.checkCollisions();
     player.bullets.forEach((bullet) => {
       bullet.update();
     });
@@ -136,7 +137,7 @@ class Game {
     });
 
     // Check collisions
-    this.checkCollisions();
+
 
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -210,8 +211,9 @@ class Game {
             let bbulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bbullet);
 
             if(self.collisionChecker.checkForCollision(bulletPositionAndSize,bbulletPositionAndSize)){
-              bullet.flagForDeletion();
               bbullet.flagForDeletion();
+              bullet.flagForDeletion();
+
             }
           });
         });
