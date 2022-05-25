@@ -186,7 +186,7 @@ class Game {
     let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
     boss.bossBullets.forEach((bullet) => {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
-      if (self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
+      if (player.vulnerableTimeLeft<=0&&self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
         bullet.flagForDeletion();
         player.loseHealth(); // Damage Player
       }
