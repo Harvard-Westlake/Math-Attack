@@ -89,6 +89,7 @@ export default class InputHandler{
       "end" : 69,
       "jump" : 90
     };
+    alert ("game has started");
   }
 
 

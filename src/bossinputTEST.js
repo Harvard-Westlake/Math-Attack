@@ -4,7 +4,9 @@ export default class BossInputHandler{
     this.boss = boss;
 
     this.keyDown = {};
-    this.keys = {};
+    this.keys = {
+      "bossfire": 80
+    };
 
     document.addEventListener('keydown', (event)=>{
 
