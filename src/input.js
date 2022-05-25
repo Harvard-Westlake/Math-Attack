@@ -180,6 +180,10 @@ export default class InputHandler {
           this.player.isJumping = false;
           this.keyDown[event.keyCode] = false;
           break;
+        case this.keys.up:
+            this.player.isJumping = false;
+            this.keyDown[event.keyCode] = false;
+            break;
         case this.keys.fire:
           this.fireBulletSwitch = 0;
           break;
