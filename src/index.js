@@ -165,9 +165,10 @@ class Game {
     }
 
     if (player.remainingHealthHearts == 0){
+      alert("you are dead!! oh no :(. Press the restart button to start a new game");
       player.resetPlayer();
       player.position.x=665;
-      player.position.y=665; 
+      player.position.y=665;
       boss.resetBoss();
     }
   }
