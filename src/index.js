@@ -222,6 +222,11 @@ class Game {
         {
           boss.takeDamage(1);//Damage Boss
         }
+        //if the player is not dashing but simply collides with boss
+      else {
+        player.loseHealth();//Lose player health
+        player.vulnerableTimeLeft = player.hitVulnerabilityTime;
+        }
       }
   }
 }
