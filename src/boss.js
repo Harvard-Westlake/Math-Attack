@@ -20,8 +20,9 @@ export default class Boss{
     };//x and y position
     this.height = 50;
     this.width = 50;
-    this.velocity = { 
-      x:0,
+    this.xSpeed = this.gameWidth/500;
+    this.velocity = {
+      x:-1*this.xSpeed,
       y:0,
     }
     this.maxSpeed;//maximum speed
@@ -54,14 +55,14 @@ export default class Boss{
   resetBoss(){
     this.health = this.healthMax; // Health is a certain amount of HP
     this.healthPct = 100; // Integer out of 100
-    this.updateHealthBar(); 
+    this.updateHealthBar();
     this.weapon = weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
       y:gameHeight - 60,
     };//x and y position
     this.velocity = {
-      x:0,
+      x:-1*this.xSpeed,
       y:0,
     }
     this.maxSpeed;//maximum speed
@@ -107,6 +108,18 @@ export default class Boss{
 
   update(deltaTime){
     if(!deltaTime)return;
+    console.log(this.velocity.x+" "+this.gameWidth);
+    if(this.position.x>=(5/6)*this.gameWidth)
+    {
+      this.velocity.x=-1*this.xSpeed;
+    }
+    if (this.position.x<=0)
+    {
+      this.velocity.x=this.xSpeed;
+    }
+    this.position.x += this.velocity.x;
+
+
     for(let i = 0;i<this.bossBullets.length;i++)
     {
       if(this.bossBullets[i].needsDelete)
