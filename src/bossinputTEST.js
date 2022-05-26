@@ -26,4 +26,14 @@ addFireToKeys()
   };
 }
 
+resetKeys()
+{
+  this.keys = {};
+}
+
+getKeys()
+{
+  return this.keys;
+}
+
 }

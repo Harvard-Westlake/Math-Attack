@@ -91,6 +91,16 @@ export default class InputHandler{
     };
   }
 
+  resetKeys()
+  {
+    this.keys = {};
+  }
+
+  getKeys()
+  {
+    return this.keys;
+  }
+
   constructor(player){
     this.fireBulletSwitch = 0;
     this.player = player;

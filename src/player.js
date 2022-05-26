@@ -103,7 +103,7 @@ export default class Player{
     this.isMovementEnabled = true;
     this.velX = 0;
     this.velY = 0;
-
+    
   }
 
 

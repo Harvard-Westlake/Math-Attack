@@ -107,6 +107,8 @@ canvas.addEventListener("click", function (evt) {
       var mousePos = getMousePos(canvas, evt);
       if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
       {
+        console.log (ih.getKeys());
+        console.log (bi.getKeys());
         ih.writeOutKeys();
         bi.addFireToKeys();
       }
@@ -185,6 +187,8 @@ class Game {
     // Check boss death and draw boss death states
     if (boss.isDead()) {
       boss.handleDeath(this, ctx);
+      bi.resetKeys();
+      ih.resetKeys();
     }
 
     if (player.remainingHealthHearts == 0){
@@ -193,6 +197,11 @@ class Game {
       player.position.x=665;
       player.position.y=665;
       boss.resetBoss();
+      bi.resetKeys();
+      ih.resetKeys();
+      console.log (ih.getKeys());
+      console.log (bi.getKeys());
+
     }
   }
 
