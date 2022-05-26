@@ -8,6 +8,7 @@ import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 import Collision from '/src/collision.js'
 import HealthBar from '/src/healthBar.js'
+import StartButton from '/src/startbutton.js'
 
 let GAME_WIDTH = 0;
 let GAME_HEIGHT = 0;
@@ -46,6 +47,14 @@ function preventDefaultForScrollKeys(e) {
   }
 }
 
+function getMousePos(canvas, evt) {
+   var rect = canvas.getBoundingClientRect();
+   return {
+     x: evt.clientX - rect.left,
+     y: evt.clientY - rect.top,
+   };
+ }
+
 // modern Chrome requires { passive: false } when adding event
 var supportsPassive = false;
 try {
@@ -62,6 +71,19 @@ window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+
+canvas.addEventListener("click", function (evt) {
+      var mousePos = getMousePos(canvas, evt);
+      console.log (mousePos.x);
+      console.log (mousePos.y);
+      if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
+      {
+        alert ("startButton pressed");
+      }
+      else {
+        console.log("missed");
+      }
+    });
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
@@ -139,16 +161,19 @@ class Game {
     // Check collisions
     this.checkCollisions();
 
+    //stuff for StartButton
+    let sb = new StartButton();
+
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
     ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
-
     player.drawHealth(ctx);
     player.draw(ctx);
     player.bullets.forEach((bullet) => {
       bullet.draw(ctx);
 
     });
+    sb.draw(ctx);
 
     boss.draw(ctx);
     boss.bossBullets.forEach((bullet) => {
