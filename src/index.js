@@ -128,6 +128,7 @@ class Game {
     // Update All Game Objects
     player.update(deltaTime);
     boss.update(deltaTime);
+    this.checkCollisions();
     player.bullets.forEach((bullet) => {
       bullet.update();
     });
@@ -136,7 +137,7 @@ class Game {
     });
 
     // Check collisions
-    this.checkCollisions();
+
 
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -202,7 +203,20 @@ class Game {
       }
     //create health bar instance and if health bar percent is zero then lose health
     });
+    //delete bullets that hit each other
+        player.bullets.forEach((bullet) => {
+          let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
 
+          boss.bossBullets.forEach((bbullet) => {
+            let bbulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bbullet);
+
+            if(self.collisionChecker.checkForCollision(bulletPositionAndSize,bbulletPositionAndSize)){
+              bbullet.flagForDeletion();
+              bullet.flagForDeletion();
+
+            }
+          });
+        });
     // Check Boss is hit by Player Bullets
     let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
     player.bullets.forEach((bullet) => {
