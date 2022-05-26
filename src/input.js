@@ -1,14 +1,11 @@
-export default class InputHandler{
-
-
+export default class InputHandler {
   // Sets left or right view direction.  All other directions
   // are set in 'updateOrientation'
   updateUnderlyingOrientation(leftOrRight) {
     if (leftOrRight == this.keys.left) {
       this.underlyingOrientation = this.orientations.left;
       this.player.moveLeft();
-    }
-    else if (leftOrRight == this.keys.right) {
+    } else if (leftOrRight == this.keys.right) {
       this.underlyingOrientation = this.orientations.right;
       this.player.moveRight();
     }
@@ -20,7 +17,6 @@ export default class InputHandler{
   // flag states
   updateOrientation() {
     switch (this.underlyingOrientation) {
-
       case this.orientations.left:
         if (this.keyDown[this.keys.up]) {
           if (!this.keyDown[this.keys.left]) {
@@ -64,16 +60,14 @@ export default class InputHandler{
     //console.log("Orientation:" + this.orientation);
   }
 
-  manuallyKeyUpAllButtons()
-  {
+  manuallyKeyUpAllButtons() {
     let self = this;
-    Object.keys(this.keys).forEach(function(k, v){
-      if (self.keyDown[k] == true)
-      {
+    Object.keys(this.keys).forEach(function (k, v) {
+      if (self.keyDown[k] == true) {
         const input = document.getElementById("gameScreen");
-        this.input.dispatchEvent(new KeyboardEvent('keyup', {k:v}));
+        this.input.dispatchEvent(new KeyboardEvent("keyup", { k: v }));
       }
-});
+    });
   }
 
   writeOutKeys()
@@ -106,14 +100,14 @@ export default class InputHandler{
     this.player = player;
     // Kinda gross but
     this.orientations = {
-      "upLeft" : "upLeft",
-      "upRight" : "upRight",
-      "up" : "up",
-      "left" : "left",
-      "right" : "right",
-      "down" : "down",
-      "downLeft" : "downLeft",
-      "downRight" : "downRight"
+      upLeft: "upLeft",
+      upRight: "upRight",
+      up: "up",
+      left: "left",
+      right: "right",
+      down: "down",
+      downLeft: "downLeft",
+      downRight: "downRight",
     };
     this.underlyingOrientation = this.orientations.right;
     this.orientation = this.orientations.right;
@@ -124,14 +118,12 @@ export default class InputHandler{
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      if (this.player.checkIfMovementEnabled() == true)
-      {
+      if (this.player.checkIfMovementEnabled() == true) {
         console.log("movement is enabled");
         switch (event.keyCode) {
-
           // Arrow keys for orientation
           case this.keys.left: //37
-          case this.keys.right:  //39
+          case this.keys.right: //39
             this.keyDown[event.keyCode] = true;
             this.updateUnderlyingOrientation(event.keyCode);
             break;
@@ -149,7 +141,11 @@ export default class InputHandler{
             break;
           // Uses only jmp and shift
           case this.keys.jump:
-            this.player.jump();
+            if (this.keyDown[this.keys.jump] != true) {
+              this.player.isJumping = true;
+              this.player.jump();
+            }
+            this.keyDown[event.keyCode] = true;
             break;
           case this.keys.shift:
             this.player.dash(this.orientation, this.orientations);
@@ -157,16 +153,12 @@ export default class InputHandler{
 
           default:
             break;
+        }
       }
-    }
-    else {
+    });
 
-    }
-      });
-
-    document.addEventListener('keyup', (event)=>{
+    document.addEventListener("keyup", (event) => {
       switch (event.keyCode) {
-
         case this.keys.up:
         case this.keys.down:
           this.keyDown[event.keyCode] = false;
@@ -176,16 +168,24 @@ export default class InputHandler{
         case this.keys.left:
         case this.keys.right:
           this.keyDown[event.keyCode] = false;
-          if (event.keyCode == this.keys.right && this.keyDown[this.keys.left]==true){
-            this.updateUnderlyingOrientation (this.keys.left);
-          }
-          else if (event.keyCode == this.keys.left && this.keyDown[this.keys.right]==true){
-            this.updateUnderlyingOrientation (this.keys.right);
-          }
-          else{
+          if (
+            event.keyCode == this.keys.right &&
+            this.keyDown[this.keys.left] == true
+          ) {
+            this.updateUnderlyingOrientation(this.keys.left);
+          } else if (
+            event.keyCode == this.keys.left &&
+            this.keyDown[this.keys.right] == true
+          ) {
+            this.updateUnderlyingOrientation(this.keys.right);
+          } else {
             this.player.stopHorizontal();
           }
           this.updateOrientation();
+          break;
+        case this.keys.jump:
+          this.player.isJumping = false;
+          this.keyDown[event.keyCode] = false;
           break;
         case this.keys.fire:
           this.fireBulletSwitch = 0;
