@@ -76,6 +76,21 @@ export default class InputHandler{
 });
   }
 
+  writeOutKeys()
+  {
+    this.keys = {
+      "left" : 37,
+      "right" : 39,
+      "up" : 38,
+      "down" : 40,
+      "shift" : 16,
+      "space" : 32,
+      "fire" : 88,
+      "end" : 69,
+      "jump" : 90
+    };
+  }
+
   constructor(player){
     this.fireBulletSwitch = 0;
     this.player = player;
@@ -94,17 +109,7 @@ export default class InputHandler{
     this.orientation = this.orientations.right;
 
     this.keyDown = {};
-    this.keys = {
-      "left" : 37,
-      "right" : 39,
-      "up" : 38,
-      "down" : 40,
-      "shift" : 16,
-      "space" : 32,
-      "fire" : 88,
-      "end" : 69,
-      "jump" : 90
-    };
+    this.keys = {};
 
     document.addEventListener('keydown', (event)=>{
 

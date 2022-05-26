@@ -72,18 +72,7 @@ window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
-canvas.addEventListener("click", function (evt) {
-      var mousePos = getMousePos(canvas, evt);
-      console.log (mousePos.x);
-      console.log (mousePos.y);
-      if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
-      {
-        alert ("startButton pressed");
-      }
-      else {
-        console.log("missed");
-      }
-    });
+
 
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
@@ -112,8 +101,16 @@ console.log(player.position);
 b.setDirection();
 b.meleeAttack();
 
-new InputHandler(player);
-new BossInputHandler(boss);
+let ih = new InputHandler(player);
+let bi = new BossInputHandler(boss);
+canvas.addEventListener("click", function (evt) {
+      var mousePos = getMousePos(canvas, evt);
+      if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
+      {
+        ih.writeOutKeys();
+        bi.addFireToKeys();
+      }
+    });
 
 let lastTime = 0;
 class Game {
