@@ -6,7 +6,7 @@ export default class BossBullet{
     this.height = this.width;
     this.Xdiff=Xdiff;
     this.Ydiff=Ydiff;
-    this.velX = 23*Math.cos(Math.atan2(Ydiff,Xdiff));
+    this.velX = 10*Math.cos(Math.atan2(Ydiff,Xdiff));
     this.velY = 23*Math.sin(Math.atan2(Ydiff,Xdiff));
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
@@ -52,7 +52,7 @@ export default class BossBullet{
       this.needsDelete = true;
     }
   }
-  
+
   flagForDeletion() {
     this.needsDelete = true;
   }

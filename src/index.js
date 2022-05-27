@@ -98,6 +98,8 @@ class Game {
     this.requestID = 0;
     this.fps = fps;
     this.collisionChecker = new Collision();
+    this.bossPlayerCollisionTimeout = false;
+
   }
 
   start() {
@@ -128,6 +130,7 @@ class Game {
     // Update All Game Objects
     player.update(deltaTime);
     boss.update(deltaTime);
+    this.checkCollisions();
     player.bullets.forEach((bullet) => {
       bullet.update();
     });
@@ -136,7 +139,7 @@ class Game {
     });
 
     // Check collisions
-    this.checkCollisions();
+
 
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -202,7 +205,20 @@ class Game {
       }
     //create health bar instance and if health bar percent is zero then lose health
     });
+    //delete bullets that hit each other
+        player.bullets.forEach((bullet) => {
+          let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
 
+          boss.bossBullets.forEach((bbullet) => {
+            let bbulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bbullet);
+
+            if(self.collisionChecker.checkForCollision(bulletPositionAndSize,bbulletPositionAndSize)){
+              bbullet.flagForDeletion();
+              bullet.flagForDeletion();
+
+            }
+          });
+        });
     // Check Boss is hit by Player Bullets
     let bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
     player.bullets.forEach((bullet) => {
@@ -212,6 +228,26 @@ class Game {
         boss.takeDamage(bullet.damage); // Damage Boss
       }
     });
+
+    //Check is Boss hit by player
+    bossPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(boss);
+      if (self.collisionChecker.checkForCollision(playerPositionAndSize, bossPositionAndSize)) {
+        //console.log("COLLISION!!!");
+        //if in the middle of dashing
+        if (player.isDashing)
+        {
+          boss.takeDamage(1);//Damage Boss
+        }
+        //if the player is not dashing but simply collides with boss
+      else if (this.bossPlayerCollisionTimeout == false)//ensures that there is a .5 second cooldown for boss player collisions
+      {
+        player.loseHealth();//Lose player health
+        this.bossPlayerCollisionTimeout = true;
+        setTimeout(() => {
+          this.bossPlayerCollisionTimeout = false;
+        }, 500);
+        }
+      }
   }
 }
 
