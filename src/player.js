@@ -151,14 +151,10 @@ export default class Player {
     this.isMovingLeft = false;
     this.isMovingRight = false;
   }
-  async jump() {
-    const timer = (ms) => new Promise((res) => setTimeout(res, ms));
-    while (this.isJumping) {
-      if (!this.hasJumped) {
+  jump() {
+    if (!this.hasJumped) {
         this.hasJumped = true;
         this.velY = this.maxSpeedY;
-      }
-      await timer(10);
     }
   }
   dash(orientation, orientations) {
