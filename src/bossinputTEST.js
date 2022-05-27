@@ -20,6 +20,9 @@ export default class BossInputHandler{
       }
     });
   }
+  updateBoss(boss) {
+    this.boss = boss;
+  }
 
 
 

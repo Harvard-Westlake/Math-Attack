@@ -90,7 +90,7 @@ b.setDirection();
 b.meleeAttack();
 
 new InputHandler(player);
-new BossInputHandler(boss);
+var bossInput = new BossInputHandler(boss);
 
 let lastTime = 0;
 class Game {
@@ -180,6 +180,7 @@ class Game {
 
   nextLevel() {
     boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
+    bossInput.updateBoss(boss);
     player.resetPlayer();
   }
 
