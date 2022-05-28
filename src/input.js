@@ -70,7 +70,32 @@ export default class InputHandler {
     });
   }
 
-  constructor(player) {
+  writeOutKeys()
+  {
+    this.keys = {
+      "left" : 37,
+      "right" : 39,
+      "up" : 38,
+      "down" : 40,
+      "shift" : 16,
+      "space" : 32,
+      "fire" : 88,
+      "end" : 69,
+      "jump" : 90
+    };
+  }
+
+  resetKeys()
+  {
+    this.keys = {};
+  }
+
+  getKeys()
+  {
+    return this.keys;
+  }
+
+  constructor(player){
     this.fireBulletSwitch = 0;
     this.player = player;
     // Kinda gross but
@@ -88,28 +113,10 @@ export default class InputHandler {
     this.orientation = this.orientations.right;
 
     this.keyDown = {};
-    this.keys = {
-      left: 37,
-      right: 39,
-      up: 38,
-      down: 40,
-      shift: 16,
-      space: 32,
-      fire: 88,
-      end: 69,
-      jump: 90,
-    };
+    this.keys = {};
 
-    // filler method until collision class can handle death
-    document.addEventListener("keydown", (event) => {
-      if (event.keyCode == 69) {
-        console.log("game over, player is dead and can't move");
-        this.player.disableMovement();
-        this.manuallyKeyUpAllButtons();
-      }
-    });
+    document.addEventListener('keydown', (event)=>{
 
-    document.addEventListener("keydown", (event) => {
       //alert(event.keyCode);
       if (this.player.checkIfMovementEnabled() == true) {
         console.log("movement is enabled");
@@ -195,5 +202,5 @@ export default class InputHandler {
           break;
       }
     });
-  }
+}
 }

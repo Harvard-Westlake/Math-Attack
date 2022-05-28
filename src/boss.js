@@ -56,10 +56,10 @@ export default class Boss{
     this.health = this.healthMax; // Health is a certain amount of HP
     this.healthPct = 100; // Integer out of 100
     this.updateHealthBar();
-    this.weapon = weapon; //health as an integer percentage out of 100
+    this.weapon = this.weapon; //health as an integer percentage out of 100
     this.position = {
       x:930,
-      y:gameHeight - 60,
+      y:this.gameHeight - 60,
     };//x and y position
     this.velocity = {
       x:-1*this.xSpeed,

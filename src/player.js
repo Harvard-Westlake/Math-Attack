@@ -312,7 +312,13 @@ export default class Player {
     this.isMovementEnabled = false;
   }
 
-  checkIfMovementEnabled() {
+  enableMovement()
+  {
+    this.isMovementEnabled = true;
+  }
+
+  checkIfMovementEnabled()
+  {
     return this.isMovementEnabled;
   }
 

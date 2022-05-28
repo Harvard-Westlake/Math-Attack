@@ -8,6 +8,7 @@ import BossWeapon from '/src/bossweapon.js'
 import BossAttack from '/src/bossattack.js'
 import Collision from '/src/collision.js'
 import HealthBar from '/src/healthBar.js'
+import StartButton from '/src/startbutton.js'
 
 let GAME_WIDTH = 0;
 let GAME_HEIGHT = 0;
@@ -46,6 +47,14 @@ function preventDefaultForScrollKeys(e) {
   }
 }
 
+function getMousePos(canvas, evt) {
+   var rect = canvas.getBoundingClientRect();
+   return {
+     x: evt.clientX - rect.left,
+     y: evt.clientY - rect.top,
+   };
+ }
+
 // modern Chrome requires { passive: false } when adding event
 var supportsPassive = false;
 try {
@@ -63,11 +72,14 @@ window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
+
+
 let player = new Player(GAME_WIDTH,GAME_HEIGHT);
 
 //testing
 let a = new BossWeapon(69,true,9000+1);
 let boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
+
 
 
 let b = new BossAttack(player,boss);
@@ -89,8 +101,18 @@ console.log(player.position);
 b.setDirection();
 b.meleeAttack();
 
-new InputHandler(player);
-new BossInputHandler(boss);
+let ih = new InputHandler(player);
+let bi = new BossInputHandler(boss);
+canvas.addEventListener("click", function (evt) {
+      var mousePos = getMousePos(canvas, evt);
+      if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
+      {
+        console.log (ih.getKeys());
+        console.log (bi.getKeys());
+        ih.writeOutKeys();
+        bi.addFireToKeys();
+      }
+    });
 
 let lastTime = 0;
 class Game {
@@ -141,16 +163,19 @@ class Game {
     // Check collisions
 
 
+    //stuff for StartButton
+    let sb = new StartButton();
+
     // Draw
     ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
     ctx.drawImage(myImg, 0,0, GAME_WIDTH, GAME_HEIGHT);
-
     player.drawHealth(ctx);
     player.draw(ctx);
     player.bullets.forEach((bullet) => {
       bullet.draw(ctx);
 
     });
+    sb.draw(ctx);
 
     boss.draw(ctx);
     boss.bossBullets.forEach((bullet) => {
@@ -165,6 +190,8 @@ class Game {
     // Check boss death and draw boss death states
     if (boss.isDead()) {
       boss.handleDeath(this, ctx);
+      bi.resetKeys();
+      ih.resetKeys();
     }
 
     if (player.remainingHealthHearts == 0){
@@ -173,6 +200,11 @@ class Game {
       player.position.x=665;
       player.position.y=665;
       boss.resetBoss();
+      bi.resetKeys();
+      ih.resetKeys();
+      console.log (ih.getKeys());
+      console.log (bi.getKeys());
+
     }
   }
 
@@ -250,7 +282,6 @@ class Game {
       }
   }
 }
-
 // Create and start game
 let af = new Game();
 af.start();
