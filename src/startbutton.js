@@ -2,10 +2,10 @@ export default class StartButton{
 
 constructor ()
 {
-  this.width = 100;
-  this.height = 75;
-  this.x = 650;
-  this.y = 150;
+  this.width = 60;
+  this.height = 10;
+  this.x = 570;
+  this.y = 40;
 }
 
 draw (ctx)
@@ -16,7 +16,7 @@ draw (ctx)
   ctx.fillRect(this.x, this.y, this.width, this.height);
   ctx.strokeRect(this.x, this.y, this.width, this.height);
   ctx.font = "20px Georgia";
-  ctx.fillText("Start Game", 650, 185);
+  ctx.fillText("Start Game", 550, 50);
 }
 
 }

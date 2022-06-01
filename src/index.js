@@ -101,16 +101,21 @@ console.log(player.position);
 b.setDirection();
 b.meleeAttack();
 
+
 let ih = new InputHandler(player);
 let bi = new BossInputHandler(boss);
 canvas.addEventListener("click", function (evt) {
       var mousePos = getMousePos(canvas, evt);
-      if ((mousePos.x > 650 && mousePos.x < 750) && (mousePos.y > 150 && mousePos.y < 225))
+      if ((mousePos.x > 570 && mousePos.x < 670) && (mousePos.y > 40 && mousePos.y < 115))
       {
         console.log (ih.getKeys());
         console.log (bi.getKeys());
         ih.writeOutKeys();
         bi.addFireToKeys();
+        boss.velocity = { //boss moves once start button is pressed
+          x:5,
+          y:0,
+        }
       }
     });
 

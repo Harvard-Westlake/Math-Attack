@@ -21,8 +21,8 @@ export default class Boss{
     this.height = 50;
     this.width = 50;
     this.xSpeed = this.gameWidth/500;
-    this.velocity = {
-      x:-1*this.xSpeed,
+    this.velocity = { //the boss starts out stationary
+      x:0,
       y:0,
     }
     this.maxSpeed;//maximum speed
