@@ -54,7 +54,7 @@ export default class Player {
       //PUT A NEW IMAGE HERE OF THE PERSON IN THE LEFT STATE
     }
     this.spriteWidth = 38; //this is the width of one frame of our animation in our spritesheet
-    this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet
+    this.spriteHeight = 38; //this is the width of one frame of our animation in our spritesheet 
     //this.frameX = 0; //this denotes how many frames we are in one animation (0 = first frame, 1 = second frame, and so on)
     //this.frameY = 3; //this denotes which animation we are looking at in the spritesheet (0 = first row, 1 = second row, and so on)
     this.gameFrame = 0;
