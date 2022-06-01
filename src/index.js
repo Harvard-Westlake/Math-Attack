@@ -228,6 +228,7 @@ class Game {
     let self = this;
 
     // Check Player is hit by Boss Bullets
+    if(player.isMovementEnabled==false){console.log("smiley face");}
     let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
     boss.bossBullets.forEach((bullet) => {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
