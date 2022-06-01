@@ -109,6 +109,7 @@ canvas.addEventListener("click", function (evt) {
       {
         console.log (ih.getKeys());
         console.log (bi.getKeys());
+        player.enableMovement();
         ih.writeOutKeys();
         bi.addFireToKeys();
       }
@@ -213,6 +214,7 @@ class Game {
   nextLevel() {
     boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
     player.resetPlayer();
+    player.enableMovement();
   }
 
   // Checks collisions for:
