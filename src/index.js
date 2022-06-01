@@ -110,6 +110,7 @@ canvas.addEventListener("click", function (evt) {
       {
         console.log (ih.getKeys());
         console.log (bi.getKeys());
+        player.enableMovement();
         ih.writeOutKeys();
         bi.addFireToKeys();
         boss.velocity = { //boss moves once start button is pressed
@@ -218,6 +219,7 @@ class Game {
   nextLevel() {
     boss = new Boss(10,player,GAME_WIDTH, GAME_HEIGHT,a);
     player.resetPlayer();
+    player.enableMovement();
   }
 
   // Checks collisions for:
@@ -233,12 +235,15 @@ class Game {
     let self = this;
 
     // Check Player is hit by Boss Bullets
+    if(player.isMovementEnabled==false){console.log("smiley face");}
     let playerPositionAndSize = self.collisionChecker.formatPlayerPositionAndSize(player);
     boss.bossBullets.forEach((bullet) => {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
       if (player.vulnerableTimeLeft<=0&&self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
         bullet.flagForDeletion();
+        if(player.isMovementEnabled==true) {
         player.loseHealth(); // Damage Player
+        }
       }
     //create health bar instance and if health bar percent is zero then lose health
     });
@@ -278,7 +283,9 @@ class Game {
         //if the player is not dashing but simply collides with boss
       else if (this.bossPlayerCollisionTimeout == false)//ensures that there is a .5 second cooldown for boss player collisions
       {
+        if(player.isMovementEnabled==true){
         player.loseHealth();//Lose player health
+        }
         this.bossPlayerCollisionTimeout = true;
         setTimeout(() => {
           this.bossPlayerCollisionTimeout = false;
