@@ -142,9 +142,9 @@ export default class Boss{
       // Render
       drawingContext.font = "80pt Calibri";
       drawingContext.fillStyle = "gray";
-      drawingContext.fillText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
+      drawingContext.fillText("Boss Defeated!", this.gameWidth/2-335, this.gameHeight/2 - 100);
       drawingContext.strokeStyle = "white";
-      drawingContext.strokeText("Boss Defeated!", this.gameWidth/2-400, this.gameHeight/2 - 100);
+      drawingContext.strokeText("Boss Defeated!", this.gameWidth/2-335, this.gameHeight/2 - 100);
     }
 
     // Call next boss and next level or store
