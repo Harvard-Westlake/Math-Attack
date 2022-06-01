@@ -114,7 +114,7 @@ export default class Player {
   loseHealth() {
     if (this.remainingHealthHearts > 0) this.remainingHealthHearts--;
     this.vulnerableTimeLeft = this.hitVulnerabilityTime;
-    if (this.remainingHealthHearts <= 0) this.disableMovement();
+    if (this.remainingHealthHearts <= 0&&this.isMovementEnabled==true) this.disableMovement();
     console.log(this.remainingHealthHearts);
   }
 
