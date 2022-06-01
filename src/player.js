@@ -17,7 +17,7 @@ export default class Player {
     this.runSlidyCoef = 0.3;
     this.stopSlidyCoef = 0.4;
     this.dashVulnerabilityTime = 15;
-    this.hitVulnerabilityTime = 60;
+    this.hitVulnerabilityTime = 200;
     this.vulnerableTimeLeft = 0;
     this.hasJumped = false;
     this.hasDashed = false;

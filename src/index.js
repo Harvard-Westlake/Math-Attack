@@ -282,7 +282,7 @@ class Game {
         this.bossPlayerCollisionTimeout = true;
         setTimeout(() => {
           this.bossPlayerCollisionTimeout = false;
-        }, 500);
+        }, 800);
         }
       }
   }
