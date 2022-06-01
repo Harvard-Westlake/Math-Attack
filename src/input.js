@@ -118,7 +118,7 @@ export default class InputHandler {
     document.addEventListener('keydown', (event)=>{
 
       //alert(event.keyCode);
-      if (this.player.isMovementEnabled == true) {
+      if (player.isMovementEnabled == true) {
         console.log("movement is enabled");
         switch (event.keyCode) {
           // Arrow keys for orientation

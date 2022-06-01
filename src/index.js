@@ -236,7 +236,9 @@ class Game {
       let bulletPositionAndSize = self.collisionChecker.formatBulletPositionAndSize(bullet);
       if (player.vulnerableTimeLeft<=0&&self.collisionChecker.checkForCollision(bulletPositionAndSize, playerPositionAndSize)) {
         bullet.flagForDeletion();
+        if(player.isMovementEnabled==true) {
         player.loseHealth(); // Damage Player
+        }
       }
     //create health bar instance and if health bar percent is zero then lose health
     });
@@ -276,7 +278,9 @@ class Game {
         //if the player is not dashing but simply collides with boss
       else if (this.bossPlayerCollisionTimeout == false)//ensures that there is a .5 second cooldown for boss player collisions
       {
+        if(player.isMovementEnabled==true){
         player.loseHealth();//Lose player health
+        }
         this.bossPlayerCollisionTimeout = true;
         setTimeout(() => {
           this.bossPlayerCollisionTimeout = false;
