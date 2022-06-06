@@ -210,7 +210,7 @@ class Game {
       ih.resetKeys();
       console.log (ih.getKeys());
       console.log (bi.getKeys());
-
+    
     }
   }
 
