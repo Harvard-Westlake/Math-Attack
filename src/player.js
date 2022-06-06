@@ -100,15 +100,18 @@ export default class Player {
     this.bullets = [];
   }
 
-
-
-  resetPlayer() {
-    this.remainingHealthHearts = 3;
-    this.isMovingLeft = false;
-    this.isMovingRight = false;
-    this.enableMovement();
-    this.velX = 0;
-    this.velY = 0;
+  resetPlayer(){
+      // resetting movement to still
+      this.isMovingLeft=false;
+      this.isMovingRight=false;
+      this.isJumping=false;
+      // resetting speed in both directions to 0
+      this.velX=0;
+      this.velY=0;
+      this.enableMovement();
+      // resetting lives
+      this.remainingHealthHearts=3;
+      
   }
 
   loseHealth() {
