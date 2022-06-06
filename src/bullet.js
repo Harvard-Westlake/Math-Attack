@@ -13,7 +13,7 @@ export default class Bullet{
     this.gameHeight = gameHeight;
     this.bulletSpeed = this.width;
     this.bulletImage = new Image();
-    this.bulletImage.src = "/images/bullet.png";
+    this.bulletImage.src = "/images/BulletBill.png";
     this.needsDelete = false;
     this.damage = damage;
     this.position = {
