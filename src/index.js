@@ -12,6 +12,7 @@ import StartButton from '/src/startbutton.js'
 
 let GAME_WIDTH = 0;
 let GAME_HEIGHT = 0;
+let bossBulletTimer = 0;
 
 if(window.innerHeight*2 < window.innerWidth)
 {
@@ -189,6 +190,11 @@ class Game {
     });
 
     this.checkRoundOver(ctx);
+    if (bossBulletTimer == 60) {
+      boss.projectileAttack();
+      bossBulletTimer = 0;
+    }
+    bossBulletTimer++;
   }
 
   checkRoundOver(ctx) {
