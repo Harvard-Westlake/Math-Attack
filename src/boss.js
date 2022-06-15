@@ -20,8 +20,11 @@ export default class Boss{
     };//x and y position
     this.height = 50;
     this.width = 50;
+
+
     this.xSpeed = this.gameWidth/500;
     this.velocity = { //the boss starts out stationary
+
       x:0,
       y:0,
     }
@@ -48,15 +51,22 @@ export default class Boss{
     let healthBarWidthPct = 15;
     let healthBarHeightPct = 5;
     this.healthBar = new HealthBar(2, 2, healthBarWidthPct, healthBarHeightPct, this.gameWidth,this.gameHeight);
-
   /*  setInterval (this.updateHealthBar, 10);*///continuously ensures that health bar on screen is accurate to real health percentage
+  var self = this;
+this.intervalID = setInterval(
+    function() { self.projectileAttack()},
+    5000);
   }
+
+
 
   resetBoss(){
     this.health = this.healthMax; // Health is a certain amount of HP
     this.healthPct = 100; // Integer out of 100
     this.updateHealthBar();
-    this.weapon = this.weapon; //health as an integer percentage out of 100
+
+    this.weapon = weapon; //health as an integer percentage out of 100
+//this above line was this.weapon = this.weapon in main, so i'm changing it to what tyler had in his code - MM
     this.position = {
       x:930,
       y:this.gameHeight - 60,
@@ -68,6 +78,7 @@ export default class Boss{
     this.maxSpeed;//maximum speed
     this.bossBullets = [];
   }
+
 
   updateHealthBar()//updates the health bar displayed on screen
   {
@@ -91,14 +102,22 @@ export default class Boss{
   }
 
   projectileAttack(){
+    console.log("Is running");
     //console.log('boss attack');
     if (this.death.isDead != true) {
       this.Xdiff=this.position.x-this.player.position.x;
       this.Ydiff=this.position.y-this.player.position.y;
 
-      this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
-    }
-  }
+
+    this.bossBullets.push(new BossBullet(this.position.x,this.position.y, this.Xdiff, this.Ydiff, this.gameWidth, this.gameHeight, this.player));
+    console.log("is shooting");
+}
+else {
+  console.log("is not shooting");
+    clearInterval(bossInterval);
+}
+}
+
 
   draw(ctx){
     this.healthBar.draw(ctx);
