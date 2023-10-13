@@ -387,6 +387,7 @@ export default class Player {
 
   update(deltaTime) {
     if (!deltaTime) return;
+    this.isJumping = false;
     this.updateVelocityX();
     this.decreaseVulnerabilityTime();
     if (this.vulnerableTimeLeft == 0) {
